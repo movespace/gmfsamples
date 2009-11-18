@@ -82,26 +82,28 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_o9YX5NLuEd6PT-OqpToYog" id="(0.5,1.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_o9YX5dLuEd6PT-OqpToYog" id="(0.4915254237288136,0.0)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_qtrwgNLxEd6PT-OqpToYog" type="4003" source="_ovrTJtLuEd6PT-OqpToYog" target="_ovrTJtLuEd6PT-OqpToYog">
-    <children xmi:type="notation:DecorationNode" xmi:id="_qtrwg9LxEd6PT-OqpToYog" type="6002">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_qtrwhNLxEd6PT-OqpToYog" x="12" y="-8"/>
+  <edges xmi:type="notation:Connector" xmi:id="_o8V2F9LuEd6PT-OqpToYog" type="4002" source="_ovrTJtLuEd6PT-OqpToYog" target="_ovrTJtLuEd6PT-OqpToYog">
+    <children xmi:type="notation:DecorationNode" xmi:id="_o8V2GtLuEd6PT-OqpToYog" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_o8V2G9LuEd6PT-OqpToYog" x="17" y="-23"/>
     </children>
-    <children xmi:type="notation:DecorationNode" xmi:id="_qtrwhdLxEd6PT-OqpToYog" type="6004">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_qtrwhtLxEd6PT-OqpToYog" x="5" y="17"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_o8V2HNLuEd6PT-OqpToYog" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_o8V2HdLuEd6PT-OqpToYog" x="8" y="-18"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_qtrwgdLxEd6PT-OqpToYog"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_o8V2GNLuEd6PT-OqpToYog"/>
     <element xmi:type="ecore:EReference" href="filesystem.ecore#//Folder/folders"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_qtrwgtLxEd6PT-OqpToYog" points="[-29, 0, -29, 0]$[-69, 0, -69, 0]$[-69, 71, -69, 71]$[0, 71, 0, 71]$[0, 30, 0, 30]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_o8V2GdLuEd6PT-OqpToYog" points="[-29, 0, -29, 0]$[-64, 0, -64, 0]$[-64, 86, -64, 86]$[0, 86, 0, 86]$[0, 30, 0, 30]"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_qtrwh9LxEd6PT-OqpToYog" type="4003" source="_ovrTJtLuEd6PT-OqpToYog" target="_ovhiENLuEd6PT-OqpToYog">
-    <children xmi:type="notation:DecorationNode" xmi:id="_qtrwitLxEd6PT-OqpToYog" type="6002">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_qtrwi9LxEd6PT-OqpToYog" y="19"/>
+  <edges xmi:type="notation:Connector" xmi:id="_o8fnENLuEd6PT-OqpToYog" type="4002" source="_ovrTJtLuEd6PT-OqpToYog" target="_ovhiENLuEd6PT-OqpToYog">
+    <children xmi:type="notation:DecorationNode" xmi:id="_o8fnE9LuEd6PT-OqpToYog" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_o8fnFNLuEd6PT-OqpToYog" x="-8" y="15"/>
     </children>
-    <children xmi:type="notation:DecorationNode" xmi:id="_qtrwjNLxEd6PT-OqpToYog" type="6004">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_qtrwjdLxEd6PT-OqpToYog" x="-1" y="23"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_o8fnFdLuEd6PT-OqpToYog" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_o8fnFtLuEd6PT-OqpToYog" x="5" y="15"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_qtrwiNLxEd6PT-OqpToYog"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_o8fnEdLuEd6PT-OqpToYog"/>
     <element xmi:type="ecore:EReference" href="filesystem.ecore#//Folder/files"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_qtrwidLxEd6PT-OqpToYog" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_o8fnEtLuEd6PT-OqpToYog" points="[0, 0, -280, -51]$[280, 51, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_o9YX4tLuEd6PT-OqpToYog" id="(0.4915254237288136,1.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_o9YX49LuEd6PT-OqpToYog" id="(0.06779661016949153,0.3559322033898305)"/>
   </edges>
 </notation:Diagram>

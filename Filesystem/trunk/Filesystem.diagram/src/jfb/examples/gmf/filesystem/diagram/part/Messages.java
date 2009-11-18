@@ -286,17 +286,67 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String FolderFolderCompartmentEditPart_title;
+	public static String FolderFolders3CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String FolderFolderCompartment2EditPart_title;
+	public static String FolderFolders3CreationTool_desc;
+
+	/**
+	 * @generated
+	 */
+	public static String FolderFiles4CreationTool_title;
+
+	/**
+	 * @generated
+	 */
+	public static String FolderFiles4CreationTool_desc;
 
 	/**
 	 * @generated
 	 */
 	public static String CommandName_OpenDiagram;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Filesystem_1000_links;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_File_2001_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Folder_2002_outgoinglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Folder_2002_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_FolderFiles_4001_target;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_FolderFiles_4001_source;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_FolderFolders_4002_target;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_FolderFolders_4002_source;
 
 	/**
 	 * @generated

@@ -38,6 +38,7 @@ import org.eclipse.gef.palette.PaletteContainer;
 import org.eclipse.gef.palette.PaletteGroup;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.palette.ToolEntry;
+import org.eclipse.gmf.runtime.diagram.ui.tools.UnspecifiedTypeConnectionTool;
 import org.eclipse.gmf.runtime.diagram.ui.tools.UnspecifiedTypeCreationTool;
 
 /**
@@ -62,6 +63,8 @@ public class FilesystemPaletteFactory {
 		paletteContainer.setId("createFilesystem1Group"); //$NON-NLS-1$
 		paletteContainer.add(createFile1CreationTool());
 		paletteContainer.add(createFolder2CreationTool());
+		paletteContainer.add(createFolderFolders3CreationTool());
+		paletteContainer.add(createFolderFiles4CreationTool());
 		return paletteContainer;
 	}
 
@@ -69,16 +72,18 @@ public class FilesystemPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createFile1CreationTool() {
-		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(2);
+		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
 		types.add(FilesystemElementTypes.File_2001);
-		types.add(FilesystemElementTypes.File_3002);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.File1CreationTool_title,
 				Messages.File1CreationTool_desc, types);
 		entry.setId("createFile1CreationTool"); //$NON-NLS-1$
-		entry.setSmallIcon(FilesystemElementTypes
-				.getImageDescriptor(FilesystemElementTypes.File_2001));
-		entry.setLargeIcon(entry.getSmallIcon());
+		entry
+				.setSmallIcon(FilesystemDiagramEditorPlugin
+						.findImageDescriptor("/Filesystem.edit/icons/full/obj16/File.gif")); //$NON-NLS-1$
+		entry
+				.setLargeIcon(FilesystemDiagramEditorPlugin
+						.findImageDescriptor("/Filesystem.edit/icons/full/obj32/File.gif")); //$NON-NLS-1$
 		return entry;
 	}
 
@@ -86,16 +91,56 @@ public class FilesystemPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createFolder2CreationTool() {
-		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(2);
+		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
 		types.add(FilesystemElementTypes.Folder_2002);
-		types.add(FilesystemElementTypes.Folder_3001);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Folder2CreationTool_title,
 				Messages.Folder2CreationTool_desc, types);
 		entry.setId("createFolder2CreationTool"); //$NON-NLS-1$
-		entry.setSmallIcon(FilesystemElementTypes
-				.getImageDescriptor(FilesystemElementTypes.Folder_2002));
-		entry.setLargeIcon(entry.getSmallIcon());
+		entry
+				.setSmallIcon(FilesystemDiagramEditorPlugin
+						.findImageDescriptor("/Filesystem.edit/icons/full/obj16/Folder.gif")); //$NON-NLS-1$
+		entry
+				.setLargeIcon(FilesystemDiagramEditorPlugin
+						.findImageDescriptor("/Filesystem.edit/icons/full/obj32/Folder.gif")); //$NON-NLS-1$
+		return entry;
+	}
+
+	/**
+	 * @generated
+	 */
+	private ToolEntry createFolderFolders3CreationTool() {
+		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
+		types.add(FilesystemElementTypes.FolderFolders_4002);
+		LinkToolEntry entry = new LinkToolEntry(
+				Messages.FolderFolders3CreationTool_title,
+				Messages.FolderFolders3CreationTool_desc, types);
+		entry.setId("createFolderFolders3CreationTool"); //$NON-NLS-1$
+		entry
+				.setSmallIcon(FilesystemDiagramEditorPlugin
+						.findImageDescriptor("/Filesystem.edit/icons/full/obj16/Edge.gif")); //$NON-NLS-1$
+		entry
+				.setLargeIcon(FilesystemDiagramEditorPlugin
+						.findImageDescriptor("/Filesystem.edit/icons/full/obj32/Edge.gif")); //$NON-NLS-1$
+		return entry;
+	}
+
+	/**
+	 * @generated
+	 */
+	private ToolEntry createFolderFiles4CreationTool() {
+		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
+		types.add(FilesystemElementTypes.FolderFiles_4001);
+		LinkToolEntry entry = new LinkToolEntry(
+				Messages.FolderFiles4CreationTool_title,
+				Messages.FolderFiles4CreationTool_desc, types);
+		entry.setId("createFolderFiles4CreationTool"); //$NON-NLS-1$
+		entry
+				.setSmallIcon(FilesystemDiagramEditorPlugin
+						.findImageDescriptor("/Filesystem.edit/icons/full/obj16/Edge.gif")); //$NON-NLS-1$
+		entry
+				.setLargeIcon(FilesystemDiagramEditorPlugin
+						.findImageDescriptor("/Filesystem.edit/icons/full/obj32/Edge.gif")); //$NON-NLS-1$
 		return entry;
 	}
 
@@ -123,6 +168,35 @@ public class FilesystemPaletteFactory {
 		 */
 		public Tool createTool() {
 			Tool tool = new UnspecifiedTypeCreationTool(elementTypes);
+			tool.setProperties(getToolProperties());
+			return tool;
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	private static class LinkToolEntry extends ToolEntry {
+
+		/**
+		 * @generated
+		 */
+		private final List relationshipTypes;
+
+		/**
+		 * @generated
+		 */
+		private LinkToolEntry(String title, String description,
+				List relationshipTypes) {
+			super(title, description, null, null);
+			this.relationshipTypes = relationshipTypes;
+		}
+
+		/**
+		 * @generated
+		 */
+		public Tool createTool() {
+			Tool tool = new UnspecifiedTypeConnectionTool(relationshipTypes);
 			tool.setProperties(getToolProperties());
 			return tool;
 		}

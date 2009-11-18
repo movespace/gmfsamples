@@ -166,7 +166,7 @@ public interface FilesystemPackage extends EPackage {
 	int FOLDER__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Folders</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Folders</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -175,7 +175,7 @@ public interface FilesystemPackage extends EPackage {
 	int FOLDER__FOLDERS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Files</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Files</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -268,10 +268,10 @@ public interface FilesystemPackage extends EPackage {
 	EAttribute getFolder_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link jfb.examples.gmf.filesystem.Folder#getFolders <em>Folders</em>}'.
+	 * Returns the meta object for the reference list '{@link jfb.examples.gmf.filesystem.Folder#getFolders <em>Folders</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Folders</em>'.
+	 * @return the meta object for the reference list '<em>Folders</em>'.
 	 * @see jfb.examples.gmf.filesystem.Folder#getFolders()
 	 * @see #getFolder()
 	 * @generated
@@ -279,10 +279,10 @@ public interface FilesystemPackage extends EPackage {
 	EReference getFolder_Folders();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link jfb.examples.gmf.filesystem.Folder#getFiles <em>Files</em>}'.
+	 * Returns the meta object for the reference list '{@link jfb.examples.gmf.filesystem.Folder#getFiles <em>Files</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Files</em>'.
+	 * @return the meta object for the reference list '<em>Files</em>'.
 	 * @see jfb.examples.gmf.filesystem.Folder#getFiles()
 	 * @see #getFolder()
 	 * @generated
@@ -374,7 +374,7 @@ public interface FilesystemPackage extends EPackage {
 		EAttribute FOLDER__NAME = eINSTANCE.getFolder_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Folders</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Folders</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -382,7 +382,7 @@ public interface FilesystemPackage extends EPackage {
 		EReference FOLDER__FOLDERS = eINSTANCE.getFolder_Folders();
 
 		/**
-		 * The meta object literal for the '<em><b>Files</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Files</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

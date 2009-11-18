@@ -30,16 +30,10 @@ package jfb.examples.gmf.filesystem.diagram.part;
 
 import jfb.examples.gmf.filesystem.Filesystem;
 import jfb.examples.gmf.filesystem.FilesystemPackage;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.File2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FileEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FileName2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FileNameEditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FilesystemEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.Folder2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFolderCompartment2EditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFolderCompartmentEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderName2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderNameEditPart;
 
 import org.eclipse.core.runtime.Platform;
@@ -155,26 +149,6 @@ public class FilesystemVisualIDRegistry {
 			}
 		}
 		switch (containerVisualID) {
-		case FolderFolderCompartmentEditPart.VISUAL_ID:
-			if (FilesystemPackage.eINSTANCE.getFolder().isSuperTypeOf(
-					domainElement.eClass())) {
-				return Folder2EditPart.VISUAL_ID;
-			}
-			if (FilesystemPackage.eINSTANCE.getFile().isSuperTypeOf(
-					domainElement.eClass())) {
-				return File2EditPart.VISUAL_ID;
-			}
-			break;
-		case FolderFolderCompartment2EditPart.VISUAL_ID:
-			if (FilesystemPackage.eINSTANCE.getFolder().isSuperTypeOf(
-					domainElement.eClass())) {
-				return Folder2EditPart.VISUAL_ID;
-			}
-			if (FilesystemPackage.eINSTANCE.getFile().isSuperTypeOf(
-					domainElement.eClass())) {
-				return File2EditPart.VISUAL_ID;
-			}
-			break;
 		case FilesystemEditPart.VISUAL_ID:
 			if (FilesystemPackage.eINSTANCE.getFile().isSuperTypeOf(
 					domainElement.eClass())) {
@@ -217,38 +191,6 @@ public class FilesystemVisualIDRegistry {
 			break;
 		case FolderEditPart.VISUAL_ID:
 			if (FolderNameEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			if (FolderFolderCompartmentEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
-		case Folder2EditPart.VISUAL_ID:
-			if (FolderName2EditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			if (FolderFolderCompartment2EditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
-		case File2EditPart.VISUAL_ID:
-			if (FileName2EditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
-		case FolderFolderCompartmentEditPart.VISUAL_ID:
-			if (Folder2EditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			if (File2EditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
-		case FolderFolderCompartment2EditPart.VISUAL_ID:
-			if (Folder2EditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			if (File2EditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;

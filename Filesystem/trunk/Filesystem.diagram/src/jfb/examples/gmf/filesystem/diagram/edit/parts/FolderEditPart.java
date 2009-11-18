@@ -28,26 +28,31 @@
 
 package jfb.examples.gmf.filesystem.diagram.edit.parts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jfb.examples.gmf.filesystem.diagram.edit.policies.FolderItemSemanticEditPolicy;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemVisualIDRegistry;
+import jfb.examples.gmf.filesystem.diagram.providers.FilesystemElementTypes;
 
-import org.eclipse.draw2d.BorderLayout;
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.editpolicies.FlowLayoutEditPolicy;
 import org.eclipse.gef.editpolicies.LayoutEditPolicy;
-import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
@@ -96,18 +101,15 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected LayoutEditPolicy createLayoutEditPolicy() {
-		LayoutEditPolicy lep = new LayoutEditPolicy() {
 
-			protected EditPolicy createChildEditPolicy(EditPart child) {
-				EditPolicy result = child
-						.getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
-				if (result == null) {
-					result = new NonResizableEditPolicy();
-				}
-				return result;
+		FlowLayoutEditPolicy lep = new FlowLayoutEditPolicy() {
+
+			protected Command createAddCommand(EditPart child, EditPart after) {
+				return null;
 			}
 
-			protected Command getMoveChildrenCommand(Request request) {
+			protected Command createMoveChildCommand(EditPart child,
+					EditPart after) {
 				return null;
 			}
 
@@ -142,13 +144,6 @@ public class FolderEditPart extends ShapeNodeEditPart {
 					.getFigureFolderNameFigure());
 			return true;
 		}
-		if (childEditPart instanceof FolderFolderCompartmentEditPart) {
-			IFigure pane = getPrimaryShape().getFigureFolderCompartmentFigure();
-			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
-			pane.add(((FolderFolderCompartmentEditPart) childEditPart)
-					.getFigure());
-			return true;
-		}
 		return false;
 	}
 
@@ -157,13 +152,6 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	 */
 	protected boolean removeFixedChild(EditPart childEditPart) {
 		if (childEditPart instanceof FolderNameEditPart) {
-			return true;
-		}
-		if (childEditPart instanceof FolderFolderCompartmentEditPart) {
-			IFigure pane = getPrimaryShape().getFigureFolderCompartmentFigure();
-			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
-			pane.remove(((FolderFolderCompartmentEditPart) childEditPart)
-					.getFigure());
 			return true;
 		}
 		return false;
@@ -193,9 +181,6 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure getContentPaneFor(IGraphicalEditPart editPart) {
-		if (editPart instanceof FolderFolderCompartmentEditPart) {
-			return getPrimaryShape().getFigureFolderCompartmentFigure();
-		}
 		return getContentPane();
 	}
 
@@ -296,6 +281,67 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
+	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMARelTypesOnSource() {
+		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+		types.add(FilesystemElementTypes.FolderFiles_4001);
+		types.add(FilesystemElementTypes.FolderFolders_4002);
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
+	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMARelTypesOnSourceAndTarget(
+			IGraphicalEditPart targetEditPart) {
+		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+		if (targetEditPart instanceof FileEditPart) {
+			types.add(FilesystemElementTypes.FolderFiles_4001);
+		}
+		if (targetEditPart instanceof jfb.examples.gmf.filesystem.diagram.edit.parts.FolderEditPart) {
+			types.add(FilesystemElementTypes.FolderFolders_4002);
+		}
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
+	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMATypesForTarget(
+			IElementType relationshipType) {
+		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+		if (relationshipType == FilesystemElementTypes.FolderFiles_4001) {
+			types.add(FilesystemElementTypes.File_2001);
+		}
+		if (relationshipType == FilesystemElementTypes.FolderFolders_4002) {
+			types.add(FilesystemElementTypes.Folder_2002);
+		}
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
+	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMARelTypesOnTarget() {
+		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+		types.add(FilesystemElementTypes.FolderFolders_4002);
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
+	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMATypesForSource(
+			IElementType relationshipType) {
+		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+		if (relationshipType == FilesystemElementTypes.FolderFolders_4002) {
+			types.add(FilesystemElementTypes.Folder_2002);
+		}
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
 	public class FolderFigure extends RectangleFigure {
 
 		/**
@@ -306,17 +352,21 @@ public class FolderEditPart extends ShapeNodeEditPart {
 		/**
 		 * @generated
 		 */
-		private RectangleFigure fFigureFolderCompartmentFigure;
-
-		/**
-		 * @generated
-		 */
 		public FolderFigure() {
 
-			BorderLayout layoutThis = new BorderLayout();
+			FlowLayout layoutThis = new FlowLayout();
+			layoutThis.setStretchMinorAxis(false);
+			layoutThis.setMinorAlignment(FlowLayout.ALIGN_LEFTTOP);
+
+			layoutThis.setMajorAlignment(FlowLayout.ALIGN_LEFTTOP);
+			layoutThis.setMajorSpacing(5);
+			layoutThis.setMinorSpacing(5);
+			layoutThis.setHorizontal(true);
+
 			this.setLayoutManager(layoutThis);
 
 			this.setLineWidth(1);
+			this.setBackgroundColor(ColorConstants.lightGray);
 			createContents();
 		}
 
@@ -328,12 +378,7 @@ public class FolderEditPart extends ShapeNodeEditPart {
 			fFigureFolderNameFigure = new WrappingLabel();
 			fFigureFolderNameFigure.setText("<...>");
 
-			this.add(fFigureFolderNameFigure, BorderLayout.TOP);
-
-			fFigureFolderCompartmentFigure = new RectangleFigure();
-			fFigureFolderCompartmentFigure.setLineWidth(1);
-
-			this.add(fFigureFolderCompartmentFigure, BorderLayout.CENTER);
+			this.add(fFigureFolderNameFigure);
 
 		}
 
@@ -361,13 +406,6 @@ public class FolderEditPart extends ShapeNodeEditPart {
 		 */
 		public WrappingLabel getFigureFolderNameFigure() {
 			return fFigureFolderNameFigure;
-		}
-
-		/**
-		 * @generated
-		 */
-		public RectangleFigure getFigureFolderCompartmentFigure() {
-			return fFigureFolderCompartmentFigure;
 		}
 
 	}

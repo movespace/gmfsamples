@@ -28,22 +28,26 @@
 
 package jfb.examples.gmf.filesystem.diagram.part;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import jfb.examples.gmf.filesystem.File;
 import jfb.examples.gmf.filesystem.Filesystem;
+import jfb.examples.gmf.filesystem.FilesystemPackage;
 import jfb.examples.gmf.filesystem.Folder;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.File2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FileEditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FilesystemEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.Folder2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFolderCompartment2EditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFolderCompartmentEditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFilesEditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFoldersEditPart;
+import jfb.examples.gmf.filesystem.diagram.providers.FilesystemElementTypes;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.notation.View;
 
 /**
@@ -56,90 +60,10 @@ public class FilesystemDiagramUpdater {
 	 */
 	public static List getSemanticChildren(View view) {
 		switch (FilesystemVisualIDRegistry.getVisualID(view)) {
-		case FolderFolderCompartmentEditPart.VISUAL_ID:
-			return getFolderFolderCompartment_7001SemanticChildren(view);
-		case FolderFolderCompartment2EditPart.VISUAL_ID:
-			return getFolderFolderCompartment_7002SemanticChildren(view);
 		case FilesystemEditPart.VISUAL_ID:
 			return getFilesystem_1000SemanticChildren(view);
 		}
 		return Collections.EMPTY_LIST;
-	}
-
-	/**
-	 * @generated
-	 */
-	public static List getFolderFolderCompartment_7001SemanticChildren(View view) {
-		if (false == view.eContainer() instanceof View) {
-			return Collections.EMPTY_LIST;
-		}
-		View containerView = (View) view.eContainer();
-		if (!containerView.isSetElement()) {
-			return Collections.EMPTY_LIST;
-		}
-		Folder modelElement = (Folder) containerView.getElement();
-		List result = new LinkedList();
-		for (Iterator it = modelElement.getFolders().iterator(); it.hasNext();) {
-			Folder childElement = (Folder) it.next();
-			int visualID = FilesystemVisualIDRegistry.getNodeVisualID(view,
-					childElement);
-			if (visualID == Folder2EditPart.VISUAL_ID) {
-				result
-						.add(new FilesystemNodeDescriptor(childElement,
-								visualID));
-				continue;
-			}
-		}
-		for (Iterator it = modelElement.getFiles().iterator(); it.hasNext();) {
-			File childElement = (File) it.next();
-			int visualID = FilesystemVisualIDRegistry.getNodeVisualID(view,
-					childElement);
-			if (visualID == File2EditPart.VISUAL_ID) {
-				result
-						.add(new FilesystemNodeDescriptor(childElement,
-								visualID));
-				continue;
-			}
-		}
-		return result;
-	}
-
-	/**
-	 * @generated
-	 */
-	public static List getFolderFolderCompartment_7002SemanticChildren(View view) {
-		if (false == view.eContainer() instanceof View) {
-			return Collections.EMPTY_LIST;
-		}
-		View containerView = (View) view.eContainer();
-		if (!containerView.isSetElement()) {
-			return Collections.EMPTY_LIST;
-		}
-		Folder modelElement = (Folder) containerView.getElement();
-		List result = new LinkedList();
-		for (Iterator it = modelElement.getFolders().iterator(); it.hasNext();) {
-			Folder childElement = (Folder) it.next();
-			int visualID = FilesystemVisualIDRegistry.getNodeVisualID(view,
-					childElement);
-			if (visualID == Folder2EditPart.VISUAL_ID) {
-				result
-						.add(new FilesystemNodeDescriptor(childElement,
-								visualID));
-				continue;
-			}
-		}
-		for (Iterator it = modelElement.getFiles().iterator(); it.hasNext();) {
-			File childElement = (File) it.next();
-			int visualID = FilesystemVisualIDRegistry.getNodeVisualID(view,
-					childElement);
-			if (visualID == File2EditPart.VISUAL_ID) {
-				result
-						.add(new FilesystemNodeDescriptor(childElement,
-								visualID));
-				continue;
-			}
-		}
-		return result;
 	}
 
 	/**
@@ -187,10 +111,6 @@ public class FilesystemDiagramUpdater {
 			return getFile_2001ContainedLinks(view);
 		case FolderEditPart.VISUAL_ID:
 			return getFolder_2002ContainedLinks(view);
-		case Folder2EditPart.VISUAL_ID:
-			return getFolder_3001ContainedLinks(view);
-		case File2EditPart.VISUAL_ID:
-			return getFile_3002ContainedLinks(view);
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -204,10 +124,6 @@ public class FilesystemDiagramUpdater {
 			return getFile_2001IncomingLinks(view);
 		case FolderEditPart.VISUAL_ID:
 			return getFolder_2002IncomingLinks(view);
-		case Folder2EditPart.VISUAL_ID:
-			return getFolder_3001IncomingLinks(view);
-		case File2EditPart.VISUAL_ID:
-			return getFile_3002IncomingLinks(view);
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -221,10 +137,6 @@ public class FilesystemDiagramUpdater {
 			return getFile_2001OutgoingLinks(view);
 		case FolderEditPart.VISUAL_ID:
 			return getFolder_2002OutgoingLinks(view);
-		case Folder2EditPart.VISUAL_ID:
-			return getFolder_3001OutgoingLinks(view);
-		case File2EditPart.VISUAL_ID:
-			return getFile_3002OutgoingLinks(view);
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -247,49 +159,39 @@ public class FilesystemDiagramUpdater {
 	 * @generated
 	 */
 	public static List getFolder_2002ContainedLinks(View view) {
-		return Collections.EMPTY_LIST;
-	}
-
-	/**
-	 * @generated
-	 */
-	public static List getFolder_3001ContainedLinks(View view) {
-		return Collections.EMPTY_LIST;
-	}
-
-	/**
-	 * @generated
-	 */
-	public static List getFile_3002ContainedLinks(View view) {
-		return Collections.EMPTY_LIST;
+		Folder modelElement = (Folder) view.getElement();
+		List result = new LinkedList();
+		result
+				.addAll(getOutgoingFeatureModelFacetLinks_Folder_Files_4001(modelElement));
+		result
+				.addAll(getOutgoingFeatureModelFacetLinks_Folder_Folders_4002(modelElement));
+		return result;
 	}
 
 	/**
 	 * @generated
 	 */
 	public static List getFile_2001IncomingLinks(View view) {
-		return Collections.EMPTY_LIST;
+		File modelElement = (File) view.getElement();
+		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+				.getResourceSet().getResources());
+		List result = new LinkedList();
+		result.addAll(getIncomingFeatureModelFacetLinks_Folder_Files_4001(
+				modelElement, crossReferences));
+		return result;
 	}
 
 	/**
 	 * @generated
 	 */
 	public static List getFolder_2002IncomingLinks(View view) {
-		return Collections.EMPTY_LIST;
-	}
-
-	/**
-	 * @generated
-	 */
-	public static List getFolder_3001IncomingLinks(View view) {
-		return Collections.EMPTY_LIST;
-	}
-
-	/**
-	 * @generated
-	 */
-	public static List getFile_3002IncomingLinks(View view) {
-		return Collections.EMPTY_LIST;
+		Folder modelElement = (Folder) view.getElement();
+		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+				.getResourceSet().getResources());
+		List result = new LinkedList();
+		result.addAll(getIncomingFeatureModelFacetLinks_Folder_Folders_4002(
+				modelElement, crossReferences));
+		return result;
 	}
 
 	/**
@@ -303,21 +205,85 @@ public class FilesystemDiagramUpdater {
 	 * @generated
 	 */
 	public static List getFolder_2002OutgoingLinks(View view) {
-		return Collections.EMPTY_LIST;
+		Folder modelElement = (Folder) view.getElement();
+		List result = new LinkedList();
+		result
+				.addAll(getOutgoingFeatureModelFacetLinks_Folder_Files_4001(modelElement));
+		result
+				.addAll(getOutgoingFeatureModelFacetLinks_Folder_Folders_4002(modelElement));
+		return result;
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getFolder_3001OutgoingLinks(View view) {
-		return Collections.EMPTY_LIST;
+	private static Collection getIncomingFeatureModelFacetLinks_Folder_Files_4001(
+			File target, Map crossReferences) {
+		Collection result = new LinkedList();
+		Collection settings = (Collection) crossReferences.get(target);
+		for (Iterator it = settings.iterator(); it.hasNext();) {
+			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
+					.next();
+			if (setting.getEStructuralFeature() == FilesystemPackage.eINSTANCE
+					.getFolder_Files()) {
+				result.add(new FilesystemLinkDescriptor(setting.getEObject(),
+						target, FilesystemElementTypes.FolderFiles_4001,
+						FolderFilesEditPart.VISUAL_ID));
+			}
+		}
+		return result;
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getFile_3002OutgoingLinks(View view) {
-		return Collections.EMPTY_LIST;
+	private static Collection getIncomingFeatureModelFacetLinks_Folder_Folders_4002(
+			Folder target, Map crossReferences) {
+		Collection result = new LinkedList();
+		Collection settings = (Collection) crossReferences.get(target);
+		for (Iterator it = settings.iterator(); it.hasNext();) {
+			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
+					.next();
+			if (setting.getEStructuralFeature() == FilesystemPackage.eINSTANCE
+					.getFolder_Folders()) {
+				result.add(new FilesystemLinkDescriptor(setting.getEObject(),
+						target, FilesystemElementTypes.FolderFolders_4002,
+						FolderFoldersEditPart.VISUAL_ID));
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * @generated
+	 */
+	private static Collection getOutgoingFeatureModelFacetLinks_Folder_Files_4001(
+			Folder source) {
+		Collection result = new LinkedList();
+		for (Iterator destinations = source.getFiles().iterator(); destinations
+				.hasNext();) {
+			File destination = (File) destinations.next();
+			result.add(new FilesystemLinkDescriptor(source, destination,
+					FilesystemElementTypes.FolderFiles_4001,
+					FolderFilesEditPart.VISUAL_ID));
+		}
+		return result;
+	}
+
+	/**
+	 * @generated
+	 */
+	private static Collection getOutgoingFeatureModelFacetLinks_Folder_Folders_4002(
+			Folder source) {
+		Collection result = new LinkedList();
+		for (Iterator destinations = source.getFolders().iterator(); destinations
+				.hasNext();) {
+			Folder destination = (Folder) destinations.next();
+			result.add(new FilesystemLinkDescriptor(source, destination,
+					FilesystemElementTypes.FolderFolders_4002,
+					FolderFoldersEditPart.VISUAL_ID));
+		}
+		return result;
 	}
 
 }

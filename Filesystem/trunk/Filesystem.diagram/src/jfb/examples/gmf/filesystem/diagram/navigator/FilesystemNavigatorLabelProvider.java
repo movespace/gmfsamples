@@ -28,14 +28,12 @@
 
 package jfb.examples.gmf.filesystem.diagram.navigator;
 
-import jfb.examples.gmf.filesystem.diagram.edit.parts.File2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FileEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FileName2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FileNameEditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FilesystemEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.Folder2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderName2EditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFilesEditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFoldersEditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderNameEditPart;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemDiagramEditorPlugin;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemVisualIDRegistry;
@@ -128,12 +126,12 @@ public class FilesystemNavigatorLabelProvider extends LabelProvider implements
 		case FolderEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?TopLevelNode?http:///jfb/examples/gmf/filesystem.ecore?Folder", FilesystemElementTypes.Folder_2002); //$NON-NLS-1$
-		case Folder2EditPart.VISUAL_ID:
+		case FolderFilesEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http:///jfb/examples/gmf/filesystem.ecore?Folder", FilesystemElementTypes.Folder_3001); //$NON-NLS-1$
-		case File2EditPart.VISUAL_ID:
+					"Navigator?Link?http:///jfb/examples/gmf/filesystem.ecore?Folder?files", FilesystemElementTypes.FolderFiles_4001); //$NON-NLS-1$
+		case FolderFoldersEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http:///jfb/examples/gmf/filesystem.ecore?File", FilesystemElementTypes.File_3002); //$NON-NLS-1$
+					"Navigator?Link?http:///jfb/examples/gmf/filesystem.ecore?Folder?folders", FilesystemElementTypes.FolderFolders_4002); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}
@@ -192,10 +190,10 @@ public class FilesystemNavigatorLabelProvider extends LabelProvider implements
 			return getFile_2001Text(view);
 		case FolderEditPart.VISUAL_ID:
 			return getFolder_2002Text(view);
-		case Folder2EditPart.VISUAL_ID:
-			return getFolder_3001Text(view);
-		case File2EditPart.VISUAL_ID:
-			return getFile_3002Text(view);
+		case FolderFilesEditPart.VISUAL_ID:
+			return getFolderFiles_4001Text(view);
+		case FolderFoldersEditPart.VISUAL_ID:
+			return getFolderFolders_4002Text(view);
 		}
 		return getUnknownElementText(view);
 	}
@@ -249,41 +247,15 @@ public class FilesystemNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getFolder_3001Text(View view) {
-		IParser parser = FilesystemParserProvider.getParser(
-				FilesystemElementTypes.Folder_3001,
-				view.getElement() != null ? view.getElement() : view,
-				FilesystemVisualIDRegistry
-						.getType(FolderName2EditPart.VISUAL_ID));
-		if (parser != null) {
-			return parser.getPrintString(new EObjectAdapter(
-					view.getElement() != null ? view.getElement() : view),
-					ParserOptions.NONE.intValue());
-		} else {
-			FilesystemDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5004); //$NON-NLS-1$
-			return ""; //$NON-NLS-1$
-		}
+	private String getFolderFiles_4001Text(View view) {
+		return ""; //$NON-NLS-1$
 	}
 
 	/**
 	 * @generated
 	 */
-	private String getFile_3002Text(View view) {
-		IParser parser = FilesystemParserProvider
-				.getParser(FilesystemElementTypes.File_3002,
-						view.getElement() != null ? view.getElement() : view,
-						FilesystemVisualIDRegistry
-								.getType(FileName2EditPart.VISUAL_ID));
-		if (parser != null) {
-			return parser.getPrintString(new EObjectAdapter(
-					view.getElement() != null ? view.getElement() : view),
-					ParserOptions.NONE.intValue());
-		} else {
-			FilesystemDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5003); //$NON-NLS-1$
-			return ""; //$NON-NLS-1$
-		}
+	private String getFolderFolders_4002Text(View view) {
+		return ""; //$NON-NLS-1$
 	}
 
 	/**

@@ -28,16 +28,14 @@
 
 package jfb.examples.gmf.filesystem.diagram.providers;
 
-import jfb.examples.gmf.filesystem.diagram.edit.parts.File2EditPart;
+import java.util.ArrayList;
+
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FileEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FileName2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FileNameEditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FilesystemEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.Folder2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFolderCompartment2EditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFolderCompartmentEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderName2EditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFilesEditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFoldersEditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderNameEditPart;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemVisualIDRegistry;
 
@@ -61,6 +59,7 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.emf.type.core.IHintedType;
+import org.eclipse.gmf.runtime.notation.Connector;
 import org.eclipse.gmf.runtime.notation.DecorationNode;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
@@ -69,9 +68,11 @@ import org.eclipse.gmf.runtime.notation.MeasurementUnit;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
+import org.eclipse.gmf.runtime.notation.RelativeBendpoints;
+import org.eclipse.gmf.runtime.notation.Routing;
 import org.eclipse.gmf.runtime.notation.Shape;
-import org.eclipse.gmf.runtime.notation.TitleStyle;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.gmf.runtime.notation.datatype.RelativeBendpoint;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.SWT;
@@ -172,8 +173,6 @@ public class FilesystemViewProvider extends AbstractProvider implements
 				switch (visualID) {
 				case FileEditPart.VISUAL_ID:
 				case FolderEditPart.VISUAL_ID:
-				case Folder2EditPart.VISUAL_ID:
-				case File2EditPart.VISUAL_ID:
 					if (domainElement == null
 							|| visualID != FilesystemVisualIDRegistry
 									.getNodeVisualID(op.getContainerView(),
@@ -187,9 +186,7 @@ public class FilesystemViewProvider extends AbstractProvider implements
 			}
 		}
 		return FileEditPart.VISUAL_ID == visualID
-				|| FolderEditPart.VISUAL_ID == visualID
-				|| Folder2EditPart.VISUAL_ID == visualID
-				|| File2EditPart.VISUAL_ID == visualID;
+				|| FolderEditPart.VISUAL_ID == visualID;
 	}
 
 	/**
@@ -252,12 +249,6 @@ public class FilesystemViewProvider extends AbstractProvider implements
 		case FolderEditPart.VISUAL_ID:
 			return createFolder_2002(domainElement, containerView, index,
 					persisted, preferencesHint);
-		case Folder2EditPart.VISUAL_ID:
-			return createFolder_3001(domainElement, containerView, index,
-					persisted, preferencesHint);
-		case File2EditPart.VISUAL_ID:
-			return createFile_3002(domainElement, containerView, index,
-					persisted, preferencesHint);
 		}
 		// can't happen, provided #provides(CreateNodeViewOperation) is correct
 		return null;
@@ -272,6 +263,12 @@ public class FilesystemViewProvider extends AbstractProvider implements
 		IElementType elementType = getSemanticElementType(semanticAdapter);
 		String elementTypeHint = ((IHintedType) elementType).getSemanticHint();
 		switch (FilesystemVisualIDRegistry.getVisualID(elementTypeHint)) {
+		case FolderFilesEditPart.VISUAL_ID:
+			return createFolderFiles_4001(containerView, index, persisted,
+					preferencesHint);
+		case FolderFoldersEditPart.VISUAL_ID:
+			return createFolderFolders_4002(containerView, index, persisted,
+					preferencesHint);
 		}
 		// can never happen, provided #provides(CreateEdgeViewOperation) is correct
 		return null;
@@ -328,7 +325,11 @@ public class FilesystemViewProvider extends AbstractProvider implements
 	 */
 	public Node createFolder_2002(EObject domainElement, View containerView,
 			int index, boolean persisted, PreferencesHint preferencesHint) {
-		Shape node = NotationFactory.eINSTANCE.createShape();
+		Node node = NotationFactory.eINSTANCE.createNode();
+		node.getStyles()
+				.add(NotationFactory.eINSTANCE.createDescriptionStyle());
+		node.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
+		node.getStyles().add(NotationFactory.eINSTANCE.createLineStyle());
 		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
 		node.setType(FilesystemVisualIDRegistry
 				.getType(FolderEditPart.VISUAL_ID));
@@ -358,108 +359,109 @@ public class FilesystemViewProvider extends AbstractProvider implements
 			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
 					.intValue());
 		}
-		org.eclipse.swt.graphics.RGB fillRGB = PreferenceConverter.getColor(
-				prefStore, IPreferenceConstants.PREF_FILL_COLOR);
-		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE
-				.getFillStyle_FillColor(), FigureUtilities
-				.RGBToInteger(fillRGB));
 		Node label5002 = createLabel(node, FilesystemVisualIDRegistry
 				.getType(FolderNameEditPart.VISUAL_ID));
-		createCompartment(node, FilesystemVisualIDRegistry
-				.getType(FolderFolderCompartmentEditPart.VISUAL_ID), true,
-				false, false, false);
 		return node;
 	}
 
 	/**
 	 * @generated
 	 */
-	public Node createFolder_3001(EObject domainElement, View containerView,
-			int index, boolean persisted, PreferencesHint preferencesHint) {
-		Shape node = NotationFactory.eINSTANCE.createShape();
-		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
-		node.setType(FilesystemVisualIDRegistry
-				.getType(Folder2EditPart.VISUAL_ID));
-		ViewUtil.insertChildView(containerView, node, index, persisted);
-		node.setElement(domainElement);
-		// initializeFromPreferences 
+	public Edge createFolderFiles_4001(View containerView, int index,
+			boolean persisted, PreferencesHint preferencesHint) {
+		Connector edge = NotationFactory.eINSTANCE.createConnector();
+		edge.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
+		RelativeBendpoints bendpoints = NotationFactory.eINSTANCE
+				.createRelativeBendpoints();
+		ArrayList points = new ArrayList(2);
+		points.add(new RelativeBendpoint());
+		points.add(new RelativeBendpoint());
+		bendpoints.setPoints(points);
+		edge.setBendpoints(bendpoints);
+		ViewUtil.insertChildView(containerView, edge, index, persisted);
+		edge.setType(FilesystemVisualIDRegistry
+				.getType(FolderFilesEditPart.VISUAL_ID));
+		edge.setElement(null);
+		// initializePreferences
 		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint
 				.getPreferenceStore();
 
 		org.eclipse.swt.graphics.RGB lineRGB = PreferenceConverter.getColor(
 				prefStore, IPreferenceConstants.PREF_LINE_COLOR);
-		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE
+		ViewUtil.setStructuralFeatureValue(edge, NotationPackage.eINSTANCE
 				.getLineStyle_LineColor(), FigureUtilities
 				.RGBToInteger(lineRGB));
-		FontStyle nodeFontStyle = (FontStyle) node
+		FontStyle edgeFontStyle = (FontStyle) edge
 				.getStyle(NotationPackage.Literals.FONT_STYLE);
-		if (nodeFontStyle != null) {
+		if (edgeFontStyle != null) {
 			FontData fontData = PreferenceConverter.getFontData(prefStore,
 					IPreferenceConstants.PREF_DEFAULT_FONT);
-			nodeFontStyle.setFontName(fontData.getName());
-			nodeFontStyle.setFontHeight(fontData.getHeight());
-			nodeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
-			nodeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
+			edgeFontStyle.setFontName(fontData.getName());
+			edgeFontStyle.setFontHeight(fontData.getHeight());
+			edgeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
+			edgeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
 			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter
 					.getColor(prefStore, IPreferenceConstants.PREF_FONT_COLOR);
-			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
+			edgeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
 					.intValue());
 		}
-		org.eclipse.swt.graphics.RGB fillRGB = PreferenceConverter.getColor(
-				prefStore, IPreferenceConstants.PREF_FILL_COLOR);
-		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE
-				.getFillStyle_FillColor(), FigureUtilities
-				.RGBToInteger(fillRGB));
-		Node label5004 = createLabel(node, FilesystemVisualIDRegistry
-				.getType(FolderName2EditPart.VISUAL_ID));
-		createCompartment(node, FilesystemVisualIDRegistry
-				.getType(FolderFolderCompartment2EditPart.VISUAL_ID), true,
-				false, false, false);
-		return node;
+		Routing routing = Routing.get(prefStore
+				.getInt(IPreferenceConstants.PREF_LINE_STYLE));
+		if (routing != null) {
+			ViewUtil.setStructuralFeatureValue(edge, NotationPackage.eINSTANCE
+					.getRoutingStyle_Routing(), routing);
+		}
+		return edge;
 	}
 
 	/**
 	 * @generated
 	 */
-	public Node createFile_3002(EObject domainElement, View containerView,
-			int index, boolean persisted, PreferencesHint preferencesHint) {
-		Shape node = NotationFactory.eINSTANCE.createShape();
-		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
-		node.setType(FilesystemVisualIDRegistry
-				.getType(File2EditPart.VISUAL_ID));
-		ViewUtil.insertChildView(containerView, node, index, persisted);
-		node.setElement(domainElement);
-		// initializeFromPreferences 
+	public Edge createFolderFolders_4002(View containerView, int index,
+			boolean persisted, PreferencesHint preferencesHint) {
+		Connector edge = NotationFactory.eINSTANCE.createConnector();
+		edge.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
+		RelativeBendpoints bendpoints = NotationFactory.eINSTANCE
+				.createRelativeBendpoints();
+		ArrayList points = new ArrayList(2);
+		points.add(new RelativeBendpoint());
+		points.add(new RelativeBendpoint());
+		bendpoints.setPoints(points);
+		edge.setBendpoints(bendpoints);
+		ViewUtil.insertChildView(containerView, edge, index, persisted);
+		edge.setType(FilesystemVisualIDRegistry
+				.getType(FolderFoldersEditPart.VISUAL_ID));
+		edge.setElement(null);
+		// initializePreferences
 		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint
 				.getPreferenceStore();
 
 		org.eclipse.swt.graphics.RGB lineRGB = PreferenceConverter.getColor(
 				prefStore, IPreferenceConstants.PREF_LINE_COLOR);
-		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE
+		ViewUtil.setStructuralFeatureValue(edge, NotationPackage.eINSTANCE
 				.getLineStyle_LineColor(), FigureUtilities
 				.RGBToInteger(lineRGB));
-		FontStyle nodeFontStyle = (FontStyle) node
+		FontStyle edgeFontStyle = (FontStyle) edge
 				.getStyle(NotationPackage.Literals.FONT_STYLE);
-		if (nodeFontStyle != null) {
+		if (edgeFontStyle != null) {
 			FontData fontData = PreferenceConverter.getFontData(prefStore,
 					IPreferenceConstants.PREF_DEFAULT_FONT);
-			nodeFontStyle.setFontName(fontData.getName());
-			nodeFontStyle.setFontHeight(fontData.getHeight());
-			nodeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
-			nodeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
+			edgeFontStyle.setFontName(fontData.getName());
+			edgeFontStyle.setFontHeight(fontData.getHeight());
+			edgeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
+			edgeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
 			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter
 					.getColor(prefStore, IPreferenceConstants.PREF_FONT_COLOR);
-			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
+			edgeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
 					.intValue());
 		}
-		org.eclipse.swt.graphics.RGB fillRGB = PreferenceConverter.getColor(
-				prefStore, IPreferenceConstants.PREF_FILL_COLOR);
-		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE
-				.getFillStyle_FillColor(), FigureUtilities
-				.RGBToInteger(fillRGB));
-		Node label5003 = createLabel(node, FilesystemVisualIDRegistry
-				.getType(FileName2EditPart.VISUAL_ID));
-		return node;
+		Routing routing = Routing.get(prefStore
+				.getInt(IPreferenceConstants.PREF_LINE_STYLE));
+		if (routing != null) {
+			ViewUtil.setStructuralFeatureValue(edge, NotationPackage.eINSTANCE
+					.getRoutingStyle_Routing(), routing);
+		}
+		return edge;
 	}
 
 	/**
@@ -482,38 +484,6 @@ public class FilesystemViewProvider extends AbstractProvider implements
 	 */
 	private Node createLabel(View owner, String hint) {
 		DecorationNode rv = NotationFactory.eINSTANCE.createDecorationNode();
-		rv.setType(hint);
-		ViewUtil.insertChildView(owner, rv, ViewUtil.APPEND, true);
-		return rv;
-	}
-
-	/**
-	 * @generated
-	 */
-	private Node createCompartment(View owner, String hint,
-			boolean canCollapse, boolean hasTitle, boolean canSort,
-			boolean canFilter) {
-		//SemanticListCompartment rv = NotationFactory.eINSTANCE.createSemanticListCompartment();
-		//rv.setShowTitle(showTitle);
-		//rv.setCollapsed(isCollapsed);
-		Node rv;
-		if (canCollapse) {
-			rv = NotationFactory.eINSTANCE.createBasicCompartment();
-		} else {
-			rv = NotationFactory.eINSTANCE.createDecorationNode();
-		}
-		if (hasTitle) {
-			TitleStyle ts = NotationFactory.eINSTANCE.createTitleStyle();
-			ts.setShowTitle(true);
-			rv.getStyles().add(ts);
-		}
-		if (canSort) {
-			rv.getStyles().add(NotationFactory.eINSTANCE.createSortingStyle());
-		}
-		if (canFilter) {
-			rv.getStyles()
-					.add(NotationFactory.eINSTANCE.createFilteringStyle());
-		}
 		rv.setType(hint);
 		ViewUtil.insertChildView(owner, rv, ViewUtil.APPEND, true);
 		return rv;
