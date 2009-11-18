@@ -34,13 +34,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import jfb.examples.gmf.filesystem.diagram.edit.parts.File2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FileEditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FilesystemEditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.Folder2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFilesEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFoldersEditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFolderCompartment2EditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFolderCompartmentEditPart;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemVisualIDRegistry;
-import jfb.examples.gmf.filesystem.diagram.part.Messages;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
@@ -245,9 +246,6 @@ public class FilesystemNavigatorContentProvider implements
 
 		case FilesystemEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
-			FilesystemNavigatorGroup links = new FilesystemNavigatorGroup(
-					Messages.NavigatorGroupName_Filesystem_1000_links,
-					"icons/linksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view), FilesystemVisualIDRegistry
 					.getType(FileEditPart.VISUAL_ID));
@@ -258,123 +256,47 @@ public class FilesystemNavigatorContentProvider implements
 							.getType(FolderEditPart.VISUAL_ID));
 			result.addAll(createNavigatorItems(connectedViews, parentElement,
 					false));
-			connectedViews = getDiagramLinksByType(Collections.singleton(view),
-					FilesystemVisualIDRegistry
-							.getType(FolderFilesEditPart.VISUAL_ID));
-			links
-					.addChildren(createNavigatorItems(connectedViews, links,
-							false));
-			connectedViews = getDiagramLinksByType(Collections.singleton(view),
-					FilesystemVisualIDRegistry
-							.getType(FolderFoldersEditPart.VISUAL_ID));
-			links
-					.addChildren(createNavigatorItems(connectedViews, links,
-							false));
-			if (!links.isEmpty()) {
-				result.add(links);
-			}
-			return result.toArray();
-		}
-
-		case FileEditPart.VISUAL_ID: {
-			Collection result = new ArrayList();
-			FilesystemNavigatorGroup incominglinks = new FilesystemNavigatorGroup(
-					Messages.NavigatorGroupName_File_2001_incominglinks,
-					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection connectedViews = getIncomingLinksByType(Collections
-					.singleton(view), FilesystemVisualIDRegistry
-					.getType(FolderFilesEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			if (!incominglinks.isEmpty()) {
-				result.add(incominglinks);
-			}
 			return result.toArray();
 		}
 
 		case FolderEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
-			FilesystemNavigatorGroup outgoinglinks = new FilesystemNavigatorGroup(
-					Messages.NavigatorGroupName_Folder_2002_outgoinglinks,
-					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			FilesystemNavigatorGroup incominglinks = new FilesystemNavigatorGroup(
-					Messages.NavigatorGroupName_Folder_2002_incominglinks,
-					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection connectedViews = getOutgoingLinksByType(Collections
+			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view), FilesystemVisualIDRegistry
-					.getType(FolderFilesEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			connectedViews = getIncomingLinksByType(
-					Collections.singleton(view), FilesystemVisualIDRegistry
-							.getType(FolderFoldersEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(
-					Collections.singleton(view), FilesystemVisualIDRegistry
-							.getType(FolderFoldersEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			if (!outgoinglinks.isEmpty()) {
-				result.add(outgoinglinks);
-			}
-			if (!incominglinks.isEmpty()) {
-				result.add(incominglinks);
-			}
+					.getType(FolderFolderCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					FilesystemVisualIDRegistry
+							.getType(Folder2EditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(Collections.singleton(view),
+					FilesystemVisualIDRegistry
+							.getType(FolderFolderCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					FilesystemVisualIDRegistry.getType(File2EditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
 			return result.toArray();
 		}
 
-		case FolderFilesEditPart.VISUAL_ID: {
+		case Folder2EditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
-			FilesystemNavigatorGroup target = new FilesystemNavigatorGroup(
-					Messages.NavigatorGroupName_FolderFiles_4001_target,
-					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			FilesystemNavigatorGroup source = new FilesystemNavigatorGroup(
-					Messages.NavigatorGroupName_FolderFiles_4001_source,
-					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection connectedViews = getLinksTargetByType(Collections
+			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view), FilesystemVisualIDRegistry
-					.getType(FileEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(view),
+					.getType(FolderFolderCompartment2EditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
 					FilesystemVisualIDRegistry
-							.getType(FolderEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			if (!target.isEmpty()) {
-				result.add(target);
-			}
-			if (!source.isEmpty()) {
-				result.add(source);
-			}
-			return result.toArray();
-		}
-
-		case FolderFoldersEditPart.VISUAL_ID: {
-			Collection result = new ArrayList();
-			FilesystemNavigatorGroup target = new FilesystemNavigatorGroup(
-					Messages.NavigatorGroupName_FolderFolders_4002_target,
-					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			FilesystemNavigatorGroup source = new FilesystemNavigatorGroup(
-					Messages.NavigatorGroupName_FolderFolders_4002_source,
-					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection connectedViews = getLinksTargetByType(Collections
-					.singleton(view), FilesystemVisualIDRegistry
-					.getType(FolderEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(view),
+							.getType(Folder2EditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(
+					Collections.singleton(view),
 					FilesystemVisualIDRegistry
-							.getType(FolderEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			if (!target.isEmpty()) {
-				result.add(target);
-			}
-			if (!source.isEmpty()) {
-				result.add(source);
-			}
+							.getType(FolderFolderCompartment2EditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					FilesystemVisualIDRegistry.getType(File2EditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
 			return result.toArray();
 		}
 		}

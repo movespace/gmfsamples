@@ -72,12 +72,23 @@ public class FilesystemEditPartFactory implements EditPartFactory {
 			case FolderNameEditPart.VISUAL_ID:
 				return new FolderNameEditPart(view);
 
-			case FolderFilesEditPart.VISUAL_ID:
-				return new FolderFilesEditPart(view);
+			case Folder2EditPart.VISUAL_ID:
+				return new Folder2EditPart(view);
 
-			case FolderFoldersEditPart.VISUAL_ID:
-				return new FolderFoldersEditPart(view);
+			case FolderName2EditPart.VISUAL_ID:
+				return new FolderName2EditPart(view);
 
+			case File2EditPart.VISUAL_ID:
+				return new File2EditPart(view);
+
+			case FileName2EditPart.VISUAL_ID:
+				return new FileName2EditPart(view);
+
+			case FolderFolderCompartmentEditPart.VISUAL_ID:
+				return new FolderFolderCompartmentEditPart(view);
+
+			case FolderFolderCompartment2EditPart.VISUAL_ID:
+				return new FolderFolderCompartment2EditPart(view);
 			}
 		}
 		return createUnrecognizedEditPart(context, model);

@@ -28,20 +28,19 @@
 
 package jfb.examples.gmf.filesystem.diagram.edit.parts;
 
-import jfb.examples.gmf.filesystem.diagram.edit.policies.FolderItemSemanticEditPolicy;
+import jfb.examples.gmf.filesystem.diagram.edit.policies.File2ItemSemanticEditPolicy;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemVisualIDRegistry;
 
-import org.eclipse.draw2d.BorderLayout;
+import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.editpolicies.FlowLayoutEditPolicy;
 import org.eclipse.gef.editpolicies.LayoutEditPolicy;
-import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
@@ -56,12 +55,12 @@ import org.eclipse.swt.graphics.Color;
 /**
  * @generated
  */
-public class FolderEditPart extends ShapeNodeEditPart {
+public class File2EditPart extends ShapeNodeEditPart {
 
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 2002;
+	public static final int VISUAL_ID = 3002;
 
 	/**
 	 * @generated
@@ -76,7 +75,7 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public FolderEditPart(View view) {
+	public File2EditPart(View view) {
 		super(view);
 	}
 
@@ -86,7 +85,7 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new FolderItemSemanticEditPolicy());
+				new File2ItemSemanticEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, createLayoutEditPolicy());
 		// XXX need an SCR to runtime to have another abstract superclass that would let children add reasonable editpolicies
 		// removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CONNECTION_HANDLES_ROLE);
@@ -96,18 +95,15 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected LayoutEditPolicy createLayoutEditPolicy() {
-		LayoutEditPolicy lep = new LayoutEditPolicy() {
 
-			protected EditPolicy createChildEditPolicy(EditPart child) {
-				EditPolicy result = child
-						.getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
-				if (result == null) {
-					result = new NonResizableEditPolicy();
-				}
-				return result;
+		FlowLayoutEditPolicy lep = new FlowLayoutEditPolicy() {
+
+			protected Command createAddCommand(EditPart child, EditPart after) {
+				return null;
 			}
 
-			protected Command getMoveChildrenCommand(Request request) {
+			protected Command createMoveChildCommand(EditPart child,
+					EditPart after) {
 				return null;
 			}
 
@@ -122,31 +118,24 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createNodeShape() {
-		FolderFigure figure = new FolderFigure();
+		FileFigure figure = new FileFigure();
 		return primaryShape = figure;
 	}
 
 	/**
 	 * @generated
 	 */
-	public FolderFigure getPrimaryShape() {
-		return (FolderFigure) primaryShape;
+	public FileFigure getPrimaryShape() {
+		return (FileFigure) primaryShape;
 	}
 
 	/**
 	 * @generated
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof FolderNameEditPart) {
-			((FolderNameEditPart) childEditPart).setLabel(getPrimaryShape()
-					.getFigureFolderNameFigure());
-			return true;
-		}
-		if (childEditPart instanceof FolderFolderCompartmentEditPart) {
-			IFigure pane = getPrimaryShape().getFigureFolderCompartmentFigure();
-			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
-			pane.add(((FolderFolderCompartmentEditPart) childEditPart)
-					.getFigure());
+		if (childEditPart instanceof FileName2EditPart) {
+			((FileName2EditPart) childEditPart).setLabel(getPrimaryShape()
+					.getFigureFileNameFigure());
 			return true;
 		}
 		return false;
@@ -156,14 +145,7 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean removeFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof FolderNameEditPart) {
-			return true;
-		}
-		if (childEditPart instanceof FolderFolderCompartmentEditPart) {
-			IFigure pane = getPrimaryShape().getFigureFolderCompartmentFigure();
-			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
-			pane.remove(((FolderFolderCompartmentEditPart) childEditPart)
-					.getFigure());
+		if (childEditPart instanceof FileName2EditPart) {
 			return true;
 		}
 		return false;
@@ -193,9 +175,6 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure getContentPaneFor(IGraphicalEditPart editPart) {
-		if (editPart instanceof FolderFolderCompartmentEditPart) {
-			return getPrimaryShape().getFigureFolderCompartmentFigure();
-		}
 		return getContentPane();
 	}
 
@@ -290,30 +269,33 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	 */
 	public EditPart getPrimaryChildEditPart() {
 		return getChildBySemanticHint(FilesystemVisualIDRegistry
-				.getType(FolderNameEditPart.VISUAL_ID));
+				.getType(FileName2EditPart.VISUAL_ID));
 	}
 
 	/**
 	 * @generated
 	 */
-	public class FolderFigure extends RectangleFigure {
+	public class FileFigure extends RectangleFigure {
 
 		/**
 		 * @generated
 		 */
-		private WrappingLabel fFigureFolderNameFigure;
+		private WrappingLabel fFigureFileNameFigure;
 
 		/**
 		 * @generated
 		 */
-		private RectangleFigure fFigureFolderCompartmentFigure;
+		public FileFigure() {
 
-		/**
-		 * @generated
-		 */
-		public FolderFigure() {
+			FlowLayout layoutThis = new FlowLayout();
+			layoutThis.setStretchMinorAxis(false);
+			layoutThis.setMinorAlignment(FlowLayout.ALIGN_LEFTTOP);
 
-			BorderLayout layoutThis = new BorderLayout();
+			layoutThis.setMajorAlignment(FlowLayout.ALIGN_LEFTTOP);
+			layoutThis.setMajorSpacing(5);
+			layoutThis.setMinorSpacing(5);
+			layoutThis.setHorizontal(true);
+
 			this.setLayoutManager(layoutThis);
 
 			this.setLineWidth(1);
@@ -325,15 +307,10 @@ public class FolderEditPart extends ShapeNodeEditPart {
 		 */
 		private void createContents() {
 
-			fFigureFolderNameFigure = new WrappingLabel();
-			fFigureFolderNameFigure.setText("<...>");
+			fFigureFileNameFigure = new WrappingLabel();
+			fFigureFileNameFigure.setText("<...>");
 
-			this.add(fFigureFolderNameFigure, BorderLayout.TOP);
-
-			fFigureFolderCompartmentFigure = new RectangleFigure();
-			fFigureFolderCompartmentFigure.setLineWidth(1);
-
-			this.add(fFigureFolderCompartmentFigure, BorderLayout.CENTER);
+			this.add(fFigureFileNameFigure);
 
 		}
 
@@ -359,15 +336,8 @@ public class FolderEditPart extends ShapeNodeEditPart {
 		/**
 		 * @generated
 		 */
-		public WrappingLabel getFigureFolderNameFigure() {
-			return fFigureFolderNameFigure;
-		}
-
-		/**
-		 * @generated
-		 */
-		public RectangleFigure getFigureFolderCompartmentFigure() {
-			return fFigureFolderCompartmentFigure;
+		public WrappingLabel getFigureFileNameFigure() {
+			return fFigureFileNameFigure;
 		}
 
 	}

@@ -35,9 +35,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FileEditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FilesystemEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderEditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFolderCompartment2EditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFolderCompartmentEditPart;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemDiagramEditorPlugin;
 import jfb.examples.gmf.filesystem.diagram.part.Messages;
 
@@ -67,6 +67,18 @@ public class FilesystemModelingAssistantProvider extends
 	public List getTypesForPopupBar(IAdaptable host) {
 		IGraphicalEditPart editPart = (IGraphicalEditPart) host
 				.getAdapter(IGraphicalEditPart.class);
+		if (editPart instanceof FolderFolderCompartmentEditPart) {
+			ArrayList types = new ArrayList(2);
+			types.add(FilesystemElementTypes.Folder_3001);
+			types.add(FilesystemElementTypes.File_3002);
+			return types;
+		}
+		if (editPart instanceof FolderFolderCompartment2EditPart) {
+			ArrayList types = new ArrayList(2);
+			types.add(FilesystemElementTypes.Folder_3001);
+			types.add(FilesystemElementTypes.File_3002);
+			return types;
+		}
 		if (editPart instanceof FilesystemEditPart) {
 			ArrayList types = new ArrayList(2);
 			types.add(FilesystemElementTypes.File_2001);
@@ -82,9 +94,6 @@ public class FilesystemModelingAssistantProvider extends
 	public List getRelTypesOnSource(IAdaptable source) {
 		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source
 				.getAdapter(IGraphicalEditPart.class);
-		if (sourceEditPart instanceof FolderEditPart) {
-			return ((FolderEditPart) sourceEditPart).getMARelTypesOnSource();
-		}
 		return Collections.EMPTY_LIST;
 	}
 
@@ -94,12 +103,6 @@ public class FilesystemModelingAssistantProvider extends
 	public List getRelTypesOnTarget(IAdaptable target) {
 		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
 				.getAdapter(IGraphicalEditPart.class);
-		if (targetEditPart instanceof FileEditPart) {
-			return ((FileEditPart) targetEditPart).getMARelTypesOnTarget();
-		}
-		if (targetEditPart instanceof FolderEditPart) {
-			return ((FolderEditPart) targetEditPart).getMARelTypesOnTarget();
-		}
 		return Collections.EMPTY_LIST;
 	}
 
@@ -112,10 +115,6 @@ public class FilesystemModelingAssistantProvider extends
 				.getAdapter(IGraphicalEditPart.class);
 		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
 				.getAdapter(IGraphicalEditPart.class);
-		if (sourceEditPart instanceof FolderEditPart) {
-			return ((FolderEditPart) sourceEditPart)
-					.getMARelTypesOnSourceAndTarget(targetEditPart);
-		}
 		return Collections.EMPTY_LIST;
 	}
 
@@ -126,14 +125,6 @@ public class FilesystemModelingAssistantProvider extends
 			IElementType relationshipType) {
 		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
 				.getAdapter(IGraphicalEditPart.class);
-		if (targetEditPart instanceof FileEditPart) {
-			return ((FileEditPart) targetEditPart)
-					.getMATypesForSource(relationshipType);
-		}
-		if (targetEditPart instanceof FolderEditPart) {
-			return ((FolderEditPart) targetEditPart)
-					.getMATypesForSource(relationshipType);
-		}
 		return Collections.EMPTY_LIST;
 	}
 
@@ -144,10 +135,6 @@ public class FilesystemModelingAssistantProvider extends
 			IElementType relationshipType) {
 		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source
 				.getAdapter(IGraphicalEditPart.class);
-		if (sourceEditPart instanceof FolderEditPart) {
-			return ((FolderEditPart) sourceEditPart)
-					.getMATypesForTarget(relationshipType);
-		}
 		return Collections.EMPTY_LIST;
 	}
 

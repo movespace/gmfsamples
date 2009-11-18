@@ -34,11 +34,11 @@ import java.util.Map;
 import java.util.Set;
 
 import jfb.examples.gmf.filesystem.FilesystemPackage;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.File2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FileEditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FilesystemEditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.Folder2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFilesEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderFoldersEditPart;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemDiagramEditorPlugin;
 
 import org.eclipse.core.runtime.IAdaptable;
@@ -93,11 +93,12 @@ public class FilesystemElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	public static final IElementType FolderFiles_4001 = getElementType("Filesystem.diagram.FolderFiles_4001"); //$NON-NLS-1$
+	public static final IElementType Folder_3001 = getElementType("Filesystem.diagram.Folder_3001"); //$NON-NLS-1$
+
 	/**
 	 * @generated
 	 */
-	public static final IElementType FolderFolders_4002 = getElementType("Filesystem.diagram.FolderFolders_4002"); //$NON-NLS-1$
+	public static final IElementType File_3002 = getElementType("Filesystem.diagram.File_3002"); //$NON-NLS-1$
 
 	/**
 	 * @generated
@@ -217,11 +218,9 @@ public class FilesystemElementTypes extends ElementInitializers {
 
 			elements.put(Folder_2002, FilesystemPackage.eINSTANCE.getFolder());
 
-			elements.put(FolderFiles_4001, FilesystemPackage.eINSTANCE
-					.getFolder_Files());
+			elements.put(Folder_3001, FilesystemPackage.eINSTANCE.getFolder());
 
-			elements.put(FolderFolders_4002, FilesystemPackage.eINSTANCE
-					.getFolder_Folders());
+			elements.put(File_3002, FilesystemPackage.eINSTANCE.getFile());
 		}
 		return (ENamedElement) elements.get(type);
 	}
@@ -242,8 +241,8 @@ public class FilesystemElementTypes extends ElementInitializers {
 			KNOWN_ELEMENT_TYPES.add(Filesystem_1000);
 			KNOWN_ELEMENT_TYPES.add(File_2001);
 			KNOWN_ELEMENT_TYPES.add(Folder_2002);
-			KNOWN_ELEMENT_TYPES.add(FolderFiles_4001);
-			KNOWN_ELEMENT_TYPES.add(FolderFolders_4002);
+			KNOWN_ELEMENT_TYPES.add(Folder_3001);
+			KNOWN_ELEMENT_TYPES.add(File_3002);
 		}
 		return KNOWN_ELEMENT_TYPES.contains(elementType);
 	}
@@ -259,10 +258,10 @@ public class FilesystemElementTypes extends ElementInitializers {
 			return File_2001;
 		case FolderEditPart.VISUAL_ID:
 			return Folder_2002;
-		case FolderFilesEditPart.VISUAL_ID:
-			return FolderFiles_4001;
-		case FolderFoldersEditPart.VISUAL_ID:
-			return FolderFolders_4002;
+		case Folder2EditPart.VISUAL_ID:
+			return Folder_3001;
+		case File2EditPart.VISUAL_ID:
+			return File_3002;
 		}
 		return null;
 	}

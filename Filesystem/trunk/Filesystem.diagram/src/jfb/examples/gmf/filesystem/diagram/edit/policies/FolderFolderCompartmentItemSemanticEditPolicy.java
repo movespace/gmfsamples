@@ -28,47 +28,37 @@
 
 package jfb.examples.gmf.filesystem.diagram.edit.policies;
 
+import jfb.examples.gmf.filesystem.diagram.edit.commands.File2CreateCommand;
+import jfb.examples.gmf.filesystem.diagram.edit.commands.Folder2CreateCommand;
 import jfb.examples.gmf.filesystem.diagram.providers.FilesystemElementTypes;
 
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.gef.commands.Command;
-import org.eclipse.gmf.runtime.diagram.core.commands.DeleteCommand;
-import org.eclipse.gmf.runtime.emf.commands.core.command.CompositeTransactionalCommand;
-import org.eclipse.gmf.runtime.emf.type.core.commands.DestroyElementCommand;
-import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyElementRequest;
-import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 
 /**
  * @generated
  */
-public class FileItemSemanticEditPolicy extends
+public class FolderFolderCompartmentItemSemanticEditPolicy extends
 		FilesystemBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated
 	 */
-	public FileItemSemanticEditPolicy() {
-		super(FilesystemElementTypes.File_2001);
+	public FolderFolderCompartmentItemSemanticEditPolicy() {
+		super(FilesystemElementTypes.Folder_2002);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected Command getDestroyElementCommand(DestroyElementRequest req) {
-		View view = (View) getHost().getModel();
-		CompositeTransactionalCommand cmd = new CompositeTransactionalCommand(
-				getEditingDomain(), null);
-		cmd.setTransactionNestingEnabled(false);
-		EAnnotation annotation = view.getEAnnotation("Shortcut"); //$NON-NLS-1$
-		if (annotation == null) {
-			// there are indirectly referenced children, need extra commands: false
-			addDestroyShortcutsCommand(cmd, view);
-			// delete host element
-			cmd.add(new DestroyElementCommand(req));
-		} else {
-			cmd.add(new DeleteCommand(getEditingDomain(), view));
+	protected Command getCreateCommand(CreateElementRequest req) {
+		if (FilesystemElementTypes.Folder_3001 == req.getElementType()) {
+			return getGEFWrapper(new Folder2CreateCommand(req));
 		}
-		return getGEFWrapper(cmd.reduce());
+		if (FilesystemElementTypes.File_3002 == req.getElementType()) {
+			return getGEFWrapper(new File2CreateCommand(req));
+		}
+		return super.getCreateCommand(req);
 	}
 
 }

@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: jfb.examples.gmf.filesystem.diagram.part.FilesystemDiagramEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: jfb.examples.gmf.filesystem.diagram.edit.parts, 
+Export-Package: jfb.examples.gmf.filesystem.diagram.edit.parts,
  jfb.examples.gmf.filesystem.diagram.part,
  jfb.examples.gmf.filesystem.diagram.providers
 Require-Bundle: org.eclipse.core.runtime,

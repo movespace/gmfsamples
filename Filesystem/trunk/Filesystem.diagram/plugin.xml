@@ -213,8 +213,8 @@
       <viewProvider class="jfb.examples.gmf.filesystem.diagram.providers.FilesystemViewProvider">
          <Priority name="Lowest"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Filesystem"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,3001,3002"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints=""/>
       </viewProvider>
    </extension>
 
@@ -226,16 +226,16 @@
             <method name="getType()" value="Filesystem"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2001,2002"/>
+            <method name="getType()" value="2001,2002,3001,3002"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
-            <method name="getType()" value="4001,4002"/>
+            <method name="getType()" value=""/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5001,5002"/>
+            <method name="getType()" value="5001,5002,5004,5003"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
-            <method name="getType()" value=""/>
+            <method name="getType()" value="7001,7002"/>
          </object>
          <context views="generated-diagram,generated-nodes,generated-links,generated-labels,generated-compartments"/>
       </editpartProvider>
@@ -300,20 +300,20 @@
       </metamodel>
       <metamodel nsURI="http:///jfb/examples/gmf/filesystem.ecore">
          <specializationType
-               id="Filesystem.diagram.FolderFiles_4001"
-               name="%metatype.name.FolderFiles_4001"
+               id="Filesystem.diagram.Folder_3001"
+               name="%metatype.name.Folder_3001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
-            <param name="semanticHint" value="4001"/>
+            <specializes id="Filesystem.diagram.Folder_2002"/>
+            <param name="semanticHint" value="3001"/>
          </specializationType>
       </metamodel>
       <metamodel nsURI="http:///jfb/examples/gmf/filesystem.ecore">
          <specializationType
-               id="Filesystem.diagram.FolderFolders_4002"
-               name="%metatype.name.FolderFolders_4002"
+               id="Filesystem.diagram.File_3002"
+               name="%metatype.name.File_3002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
-            <param name="semanticHint" value="4002"/>
+            <specializes id="Filesystem.diagram.File_2001"/>
+            <param name="semanticHint" value="3002"/>
          </specializationType>
       </metamodel>
    </extension>
@@ -331,8 +331,8 @@
          <elementType ref="Filesystem.diagram.Filesystem_1000"/>
          <elementType ref="Filesystem.diagram.File_2001"/>
          <elementType ref="Filesystem.diagram.Folder_2002"/>
-         <elementType ref="Filesystem.diagram.FolderFiles_4001"/>
-         <elementType ref="Filesystem.diagram.FolderFolders_4002"/>
+         <elementType ref="Filesystem.diagram.Folder_3001"/>
+         <elementType ref="Filesystem.diagram.File_3002"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

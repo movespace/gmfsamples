@@ -29,7 +29,9 @@
 package jfb.examples.gmf.filesystem.diagram.providers;
 
 import jfb.examples.gmf.filesystem.FilesystemPackage;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.FileName2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FileNameEditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderName2EditPart;
 import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderNameEditPart;
 import jfb.examples.gmf.filesystem.diagram.parsers.MessageFormatParser;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemVisualIDRegistry;
@@ -92,12 +94,52 @@ public class FilesystemParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
+	private IParser folderName_5004Parser;
+
+	/**
+	 * @generated
+	 */
+	private IParser getFolderName_5004Parser() {
+		if (folderName_5004Parser == null) {
+			EAttribute[] features = new EAttribute[] { FilesystemPackage.eINSTANCE
+					.getFolder_Name() };
+			MessageFormatParser parser = new MessageFormatParser(features);
+			folderName_5004Parser = parser;
+		}
+		return folderName_5004Parser;
+	}
+
+	/**
+	 * @generated
+	 */
+	private IParser fileName_5003Parser;
+
+	/**
+	 * @generated
+	 */
+	private IParser getFileName_5003Parser() {
+		if (fileName_5003Parser == null) {
+			EAttribute[] features = new EAttribute[] { FilesystemPackage.eINSTANCE
+					.getFile_Name() };
+			MessageFormatParser parser = new MessageFormatParser(features);
+			fileName_5003Parser = parser;
+		}
+		return fileName_5003Parser;
+	}
+
+	/**
+	 * @generated
+	 */
 	protected IParser getParser(int visualID) {
 		switch (visualID) {
 		case FileNameEditPart.VISUAL_ID:
 			return getFileName_5001Parser();
 		case FolderNameEditPart.VISUAL_ID:
 			return getFolderName_5002Parser();
+		case FolderName2EditPart.VISUAL_ID:
+			return getFolderName_5004Parser();
+		case FileName2EditPart.VISUAL_ID:
+			return getFileName_5003Parser();
 		}
 		return null;
 	}

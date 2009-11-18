@@ -28,12 +28,8 @@
 
 package jfb.examples.gmf.filesystem.diagram.edit.parts;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jfb.examples.gmf.filesystem.diagram.edit.policies.FileItemSemanticEditPolicy;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemVisualIDRegistry;
-import jfb.examples.gmf.filesystem.diagram.providers.FilesystemElementTypes;
 
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
@@ -51,7 +47,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
-import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
@@ -275,27 +270,6 @@ public class FileEditPart extends ShapeNodeEditPart {
 	public EditPart getPrimaryChildEditPart() {
 		return getChildBySemanticHint(FilesystemVisualIDRegistry
 				.getType(FileNameEditPart.VISUAL_ID));
-	}
-
-	/**
-	 * @generated
-	 */
-	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMARelTypesOnTarget() {
-		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
-		types.add(FilesystemElementTypes.FolderFiles_4001);
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMATypesForSource(
-			IElementType relationshipType) {
-		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
-		if (relationshipType == FilesystemElementTypes.FolderFiles_4001) {
-			types.add(FilesystemElementTypes.Folder_2002);
-		}
-		return types;
 	}
 
 	/**

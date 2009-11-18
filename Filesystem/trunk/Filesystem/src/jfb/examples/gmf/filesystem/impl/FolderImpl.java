@@ -36,13 +36,17 @@ import jfb.examples.gmf.filesystem.Folder;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
@@ -82,7 +86,7 @@ public class FolderImpl extends EObjectImpl implements Folder {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getFolders() <em>Folders</em>}' reference list.
+	 * The cached value of the '{@link #getFolders() <em>Folders</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getFolders()
@@ -92,7 +96,7 @@ public class FolderImpl extends EObjectImpl implements Folder {
 	protected EList<Folder> folders;
 
 	/**
-	 * The cached value of the '{@link #getFiles() <em>Files</em>}' reference list.
+	 * The cached value of the '{@link #getFiles() <em>Files</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getFiles()
@@ -148,7 +152,7 @@ public class FolderImpl extends EObjectImpl implements Folder {
 	 */
 	public EList<Folder> getFolders() {
 		if (folders == null) {
-			folders = new EObjectResolvingEList<Folder>(Folder.class, this, FilesystemPackage.FOLDER__FOLDERS);
+			folders = new EObjectContainmentEList<Folder>(Folder.class, this, FilesystemPackage.FOLDER__FOLDERS);
 		}
 		return folders;
 	}
@@ -160,9 +164,25 @@ public class FolderImpl extends EObjectImpl implements Folder {
 	 */
 	public EList<File> getFiles() {
 		if (files == null) {
-			files = new EObjectResolvingEList<File>(File.class, this, FilesystemPackage.FOLDER__FILES);
+			files = new EObjectContainmentEList<File>(File.class, this, FilesystemPackage.FOLDER__FILES);
 		}
 		return files;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FilesystemPackage.FOLDER__FOLDERS:
+				return ((InternalEList<?>)getFolders()).basicRemove(otherEnd, msgs);
+			case FilesystemPackage.FOLDER__FILES:
+				return ((InternalEList<?>)getFiles()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

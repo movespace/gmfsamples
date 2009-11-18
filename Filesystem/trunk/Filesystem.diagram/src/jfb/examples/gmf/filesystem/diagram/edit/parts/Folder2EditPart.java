@@ -28,7 +28,7 @@
 
 package jfb.examples.gmf.filesystem.diagram.edit.parts;
 
-import jfb.examples.gmf.filesystem.diagram.edit.policies.FolderItemSemanticEditPolicy;
+import jfb.examples.gmf.filesystem.diagram.edit.policies.Folder2ItemSemanticEditPolicy;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemVisualIDRegistry;
 
 import org.eclipse.draw2d.BorderLayout;
@@ -56,12 +56,12 @@ import org.eclipse.swt.graphics.Color;
 /**
  * @generated
  */
-public class FolderEditPart extends ShapeNodeEditPart {
+public class Folder2EditPart extends ShapeNodeEditPart {
 
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 2002;
+	public static final int VISUAL_ID = 3001;
 
 	/**
 	 * @generated
@@ -76,7 +76,7 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public FolderEditPart(View view) {
+	public Folder2EditPart(View view) {
 		super(view);
 	}
 
@@ -86,7 +86,7 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new FolderItemSemanticEditPolicy());
+				new Folder2ItemSemanticEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, createLayoutEditPolicy());
 		// XXX need an SCR to runtime to have another abstract superclass that would let children add reasonable editpolicies
 		// removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CONNECTION_HANDLES_ROLE);
@@ -137,15 +137,15 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof FolderNameEditPart) {
-			((FolderNameEditPart) childEditPart).setLabel(getPrimaryShape()
+		if (childEditPart instanceof FolderName2EditPart) {
+			((FolderName2EditPart) childEditPart).setLabel(getPrimaryShape()
 					.getFigureFolderNameFigure());
 			return true;
 		}
-		if (childEditPart instanceof FolderFolderCompartmentEditPart) {
+		if (childEditPart instanceof FolderFolderCompartment2EditPart) {
 			IFigure pane = getPrimaryShape().getFigureFolderCompartmentFigure();
 			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
-			pane.add(((FolderFolderCompartmentEditPart) childEditPart)
+			pane.add(((FolderFolderCompartment2EditPart) childEditPart)
 					.getFigure());
 			return true;
 		}
@@ -156,13 +156,13 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean removeFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof FolderNameEditPart) {
+		if (childEditPart instanceof FolderName2EditPart) {
 			return true;
 		}
-		if (childEditPart instanceof FolderFolderCompartmentEditPart) {
+		if (childEditPart instanceof FolderFolderCompartment2EditPart) {
 			IFigure pane = getPrimaryShape().getFigureFolderCompartmentFigure();
 			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
-			pane.remove(((FolderFolderCompartmentEditPart) childEditPart)
+			pane.remove(((FolderFolderCompartment2EditPart) childEditPart)
 					.getFigure());
 			return true;
 		}
@@ -193,7 +193,7 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure getContentPaneFor(IGraphicalEditPart editPart) {
-		if (editPart instanceof FolderFolderCompartmentEditPart) {
+		if (editPart instanceof FolderFolderCompartment2EditPart) {
 			return getPrimaryShape().getFigureFolderCompartmentFigure();
 		}
 		return getContentPane();
@@ -290,7 +290,7 @@ public class FolderEditPart extends ShapeNodeEditPart {
 	 */
 	public EditPart getPrimaryChildEditPart() {
 		return getChildBySemanticHint(FilesystemVisualIDRegistry
-				.getType(FolderNameEditPart.VISUAL_ID));
+				.getType(FolderName2EditPart.VISUAL_ID));
 	}
 
 	/**
@@ -302,7 +302,6 @@ public class FolderEditPart extends ShapeNodeEditPart {
 		 * @generated
 		 */
 		private WrappingLabel fFigureFolderNameFigure;
-
 		/**
 		 * @generated
 		 */

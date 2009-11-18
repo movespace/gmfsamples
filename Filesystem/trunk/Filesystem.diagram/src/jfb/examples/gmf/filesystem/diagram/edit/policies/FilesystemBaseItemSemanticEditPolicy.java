@@ -30,8 +30,6 @@ package jfb.examples.gmf.filesystem.diagram.edit.policies;
 
 import java.util.Iterator;
 
-import jfb.examples.gmf.filesystem.File;
-import jfb.examples.gmf.filesystem.Folder;
 import jfb.examples.gmf.filesystem.diagram.edit.helpers.FilesystemBaseEditHelper;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemVisualIDRegistry;
 import jfb.examples.gmf.filesystem.diagram.providers.FilesystemElementTypes;
@@ -331,50 +329,6 @@ public class FilesystemBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 * @generated
 	 */
 	public static class LinkConstraints {
-
-		/**
-		 * @generated
-		 */
-		public static boolean canCreateFolderFiles_4001(Folder source,
-				File target) {
-			if (source != null) {
-				if (source.getFiles().contains(target)) {
-					return false;
-				}
-			}
-
-			return canExistFolderFiles_4001(source, target);
-		}
-
-		/**
-		 * @generated
-		 */
-		public static boolean canCreateFolderFolders_4002(Folder source,
-				Folder target) {
-			if (source != null) {
-				if (source.getFolders().contains(target)) {
-					return false;
-				}
-			}
-
-			return canExistFolderFolders_4002(source, target);
-		}
-
-		/**
-		 * @generated
-		 */
-		public static boolean canExistFolderFiles_4001(Folder source,
-				File target) {
-			return true;
-		}
-
-		/**
-		 * @generated
-		 */
-		public static boolean canExistFolderFolders_4002(Folder source,
-				Folder target) {
-			return true;
-		}
 	}
 
 }

@@ -5,12 +5,6 @@
     xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="filesystem">
   <figures
       name="Default">
-    <figures
-        xsi:type="gmfgraph:PolylineDecoration"
-        name="FolderFoldersTargetDecoration"/>
-    <figures
-        xsi:type="gmfgraph:PolylineDecoration"
-        name="FolderFilesTargetDecoration"/>
     <descriptors
         name="FileFigure">
       <actualFigure
@@ -32,31 +26,28 @@
           xsi:type="gmfgraph:Rectangle"
           name="FolderFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
-        <backgroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="lightGray"/>
+            xsi:type="gmfgraph:BorderLayout"/>
         <children
             xsi:type="gmfgraph:Label"
             name="FolderNameFigure"
-            text="&lt;...>"/>
+            text="&lt;...>">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              alignment="BEGINNING"
+              vertical="true"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="FolderCompartmentFigure">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              vertical="true"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="FolderFoldersFigure">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="FolderFoldersFigure"
-          targetDecoration="//@figures.0/@figures.0"/>
-    </descriptors>
-    <descriptors
-        name="FolderFilesFigure">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="FolderFilesFigure"
-          targetDecoration="//@figures.0/@figures.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
     </descriptors>
   </figures>
   <nodes
@@ -65,12 +56,11 @@
   <nodes
       name="Folder"
       figure="FolderFigure"/>
-  <connections
-      name="FolderFolders"
-      figure="FolderFoldersFigure"/>
-  <connections
-      name="FolderFiles"
-      figure="FolderFilesFigure"/>
+  <compartments
+      name="FolderCompartment"
+      figure="FolderFigure"
+      collapsible="true"
+      accessor="//@figures.0/@descriptors.1/@accessors.1"/>
   <labels
       name="FileName"
       figure="FileFigure"

@@ -15,8 +15,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Folder">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="folders" upperBound="-1"
-        eType="#//Folder"/>
+        eType="#//Folder" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="files" upperBound="-1"
-        eType="#//File"/>
+        eType="#//File" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

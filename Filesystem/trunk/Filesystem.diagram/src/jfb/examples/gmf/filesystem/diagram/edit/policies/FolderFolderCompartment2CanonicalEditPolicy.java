@@ -29,7 +29,6 @@
 package jfb.examples.gmf.filesystem.diagram.edit.policies;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -37,25 +36,20 @@ import java.util.List;
 import java.util.Set;
 
 import jfb.examples.gmf.filesystem.FilesystemPackage;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FileEditPart;
-import jfb.examples.gmf.filesystem.diagram.edit.parts.FolderEditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.File2EditPart;
+import jfb.examples.gmf.filesystem.diagram.edit.parts.Folder2EditPart;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemDiagramUpdater;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemNodeDescriptor;
 import jfb.examples.gmf.filesystem.diagram.part.FilesystemVisualIDRegistry;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand;
-import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalConnectionEditPolicy;
-import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.gmf.runtime.notation.Edge;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * @generated
  */
-public class FilesystemCanonicalEditPolicy extends
-		CanonicalConnectionEditPolicy {
+public class FolderFolderCompartment2CanonicalEditPolicy extends
+		CanonicalEditPolicy {
 
 	/**
 	 * @generated
@@ -69,8 +63,8 @@ public class FilesystemCanonicalEditPolicy extends
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
 		for (Iterator it = FilesystemDiagramUpdater
-				.getFilesystem_1000SemanticChildren(viewObject).iterator(); it
-				.hasNext();) {
+				.getFolderFolderCompartment_7002SemanticChildren(viewObject)
+				.iterator(); it.hasNext();) {
 			result
 					.add(((FilesystemNodeDescriptor) it.next())
 							.getModelElement());
@@ -81,18 +75,11 @@ public class FilesystemCanonicalEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected boolean shouldDeleteView(View view) {
-		return true;
-	}
-
-	/**
-	 * @generated
-	 */
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
 		int visualID = FilesystemVisualIDRegistry.getVisualID(view);
 		switch (visualID) {
-		case FileEditPart.VISUAL_ID:
-		case FolderEditPart.VISUAL_ID:
+		case Folder2EditPart.VISUAL_ID:
+		case File2EditPart.VISUAL_ID:
 			if (!semanticChildren.contains(view.getElement())) {
 				return true;
 			}
@@ -114,66 +101,11 @@ public class FilesystemCanonicalEditPolicy extends
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();
 			myFeaturesToSynchronize.add(FilesystemPackage.eINSTANCE
-					.getFilesystem_Files());
+					.getFolder_Folders());
 			myFeaturesToSynchronize.add(FilesystemPackage.eINSTANCE
-					.getFilesystem_Folders());
+					.getFolder_Files());
 		}
 		return myFeaturesToSynchronize;
 	}
 
-	/**
-	 * @generated
-	 */
-	protected List getSemanticConnectionsList() {
-		return Collections.EMPTY_LIST;
-	}
-
-	/**
-	 * @generated
-	 */
-	protected EObject getSourceElement(EObject relationship) {
-		return null;
-	}
-
-	/**
-	 * @generated
-	 */
-	protected EObject getTargetElement(EObject relationship) {
-		return null;
-	}
-
-	/**
-	 * @generated
-	 */
-	protected boolean shouldIncludeConnection(Edge connector,
-			Collection children) {
-		return false;
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void refreshSemantic() {
-		List createdViews = new LinkedList();
-		createdViews.addAll(refreshSemanticChildren());
-		List createdConnectionViews = new LinkedList();
-		createdConnectionViews.addAll(refreshSemanticConnections());
-
-		if (createdViews.size() > 1) {
-			// perform a layout of the container
-			DeferredLayoutCommand layoutCmd = new DeferredLayoutCommand(host()
-					.getEditingDomain(), createdViews, host());
-			executeCommand(new ICommandProxy(layoutCmd));
-		}
-
-		createdViews.addAll(createdConnectionViews);
-		makeViewsImmutable(createdViews);
-	}
-
-	/**
-	 * @generated
-	 */
-	private Diagram getDiagram() {
-		return ((View) getHost().getModel()).getDiagram();
-	}
 }

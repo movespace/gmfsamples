@@ -28,62 +28,52 @@
 
 package jfb.examples.gmf.filesystem.diagram.edit.commands;
 
-import jfb.examples.gmf.filesystem.File;
+import jfb.examples.gmf.filesystem.FilesystemFactory;
 import jfb.examples.gmf.filesystem.Folder;
-import jfb.examples.gmf.filesystem.diagram.edit.policies.FilesystemBaseItemSemanticEditPolicy;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
+import org.eclipse.gmf.runtime.common.core.command.ICommand;
+import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
-import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
+import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
+import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
+import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * @generated
  */
-public class FolderFilesCreateCommand extends EditElementCommand {
+public class Folder2CreateCommand extends EditElementCommand {
 
 	/**
 	 * @generated
 	 */
-	private final EObject source;
+	public Folder2CreateCommand(CreateElementRequest req) {
+		super(req.getLabel(), null, req);
+	}
 
 	/**
+	 * FIXME: replace with setElementToEdit()
 	 * @generated
 	 */
-	private final EObject target;
-
-	/**
-	 * @generated
-	 */
-	public FolderFilesCreateCommand(CreateRelationshipRequest request,
-			EObject source, EObject target) {
-		super(request.getLabel(), null, request);
-		this.source = source;
-		this.target = target;
+	protected EObject getElementToEdit() {
+		EObject container = ((CreateElementRequest) getRequest())
+				.getContainer();
+		if (container instanceof View) {
+			container = ((View) container).getElement();
+		}
+		return container;
 	}
 
 	/**
 	 * @generated
 	 */
 	public boolean canExecute() {
-		if (source == null && target == null) {
-			return false;
-		}
-		if (source != null && false == source instanceof Folder) {
-			return false;
-		}
-		if (target != null && false == target instanceof File) {
-			return false;
-		}
-		if (getSource() == null) {
-			return true; // link creation is in progress; source is not defined yet
-		}
-		// target may be null here but it's possible to check constraint
-		return FilesystemBaseItemSemanticEditPolicy.LinkConstraints
-				.canCreateFolderFiles_4001(getSource(), getTarget());
+		return true;
+
 	}
 
 	/**
@@ -91,36 +81,34 @@ public class FolderFilesCreateCommand extends EditElementCommand {
 	 */
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
-		if (!canExecute()) {
-			throw new ExecutionException(
-					"Invalid arguments in create link command"); //$NON-NLS-1$
+		Folder newElement = FilesystemFactory.eINSTANCE.createFolder();
+
+		Folder owner = (Folder) getElementToEdit();
+		owner.getFolders().add(newElement);
+
+		doConfigure(newElement, monitor, info);
+
+		((CreateElementRequest) getRequest()).setNewElement(newElement);
+		return CommandResult.newOKCommandResult(newElement);
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void doConfigure(Folder newElement, IProgressMonitor monitor,
+			IAdaptable info) throws ExecutionException {
+		IElementType elementType = ((CreateElementRequest) getRequest())
+				.getElementType();
+		ConfigureRequest configureRequest = new ConfigureRequest(
+				getEditingDomain(), newElement, elementType);
+		configureRequest.setClientContext(((CreateElementRequest) getRequest())
+				.getClientContext());
+		configureRequest.addParameters(getRequest().getParameters());
+		ICommand configureCommand = elementType
+				.getEditCommand(configureRequest);
+		if (configureCommand != null && configureCommand.canExecute()) {
+			configureCommand.execute(monitor, info);
 		}
-
-		if (getSource() != null && getTarget() != null) {
-			getSource().getFiles().add(getTarget());
-		}
-		return CommandResult.newOKCommandResult();
-
 	}
 
-	/**
-	 * @generated
-	 */
-	protected void setElementToEdit(EObject element) {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * @generated
-	 */
-	protected Folder getSource() {
-		return (Folder) source;
-	}
-
-	/**
-	 * @generated
-	 */
-	protected File getTarget() {
-		return (File) target;
-	}
 }
