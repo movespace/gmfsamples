@@ -36,15 +36,21 @@ import jfb.examples.gmf.filesystem.diagram.part.FilesystemVisualIDRegistry;
 import jfb.examples.gmf.filesystem.diagram.providers.FilesystemElementTypes;
 
 import org.eclipse.draw2d.FlowLayout;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
+import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.FlowLayoutEditPolicy;
 import org.eclipse.gef.editpolicies.LayoutEditPolicy;
+import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
@@ -100,15 +106,18 @@ public class FileEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected LayoutEditPolicy createLayoutEditPolicy() {
+		LayoutEditPolicy lep = new LayoutEditPolicy() {
 
-		FlowLayoutEditPolicy lep = new FlowLayoutEditPolicy() {
-
-			protected Command createAddCommand(EditPart child, EditPart after) {
-				return null;
+			protected EditPolicy createChildEditPolicy(EditPart child) {
+				EditPolicy result = child
+						.getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
+				if (result == null) {
+					result = new NonResizableEditPolicy();
+				}
+				return result;
 			}
 
-			protected Command createMoveChildCommand(EditPart child,
-					EditPart after) {
+			protected Command getMoveChildrenCommand(Request request) {
 				return null;
 			}
 
@@ -187,7 +196,19 @@ public class FileEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected NodeFigure createNodePlate() {
-		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(40, 40);
+		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(40, 40) {
+			public PointList getPolygonPoints() {
+				PointList points = new PointList(6);
+				Rectangle anchRect = getHandleBounds();
+				points.addPoint(anchRect.x,                          anchRect.y);                         // A1
+				points.addPoint(anchRect.x + anchRect.width,         anchRect.y);                         // A2
+				points.addPoint(anchRect.x + anchRect.width,         anchRect.y + anchRect.height*30/40); // A3
+				points.addPoint(anchRect.x + anchRect.width * 30/40, anchRect.y + anchRect.height);       // A4
+				points.addPoint(anchRect.x,                          anchRect.y + anchRect.height);       // A5
+				points.addPoint(anchRect.x,                          anchRect.y);                         // A1
+				return points;
+			}
+		};
 		return result;
 	}
 
@@ -301,7 +322,7 @@ public class FileEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public class FileFigure extends RectangleFigure {
+	public class FileFigure extends Shape {
 
 		/**
 		 * @generated
@@ -312,18 +333,23 @@ public class FileEditPart extends ShapeNodeEditPart {
 		 * @generated
 		 */
 		public FileFigure() {
-
-			FlowLayout layoutThis = new FlowLayout();
-			layoutThis.setStretchMinorAxis(false);
-			layoutThis.setMinorAlignment(FlowLayout.ALIGN_LEFTTOP);
-
-			layoutThis.setMajorAlignment(FlowLayout.ALIGN_LEFTTOP);
-			layoutThis.setMajorSpacing(5);
-			layoutThis.setMinorSpacing(5);
-			layoutThis.setHorizontal(true);
-
-			this.setLayoutManager(layoutThis);
-
+			this.addPoint(new Point(getMapMode().DPtoLP(0), getMapMode()
+					.DPtoLP(0)));
+			this.addPoint(new Point(getMapMode().DPtoLP(40), getMapMode()
+					.DPtoLP(0)));
+			this.addPoint(new Point(getMapMode().DPtoLP(40), getMapMode()
+					.DPtoLP(30)));
+			this.addPoint(new Point(getMapMode().DPtoLP(30), getMapMode()
+					.DPtoLP(30)));
+			this.addPoint(new Point(getMapMode().DPtoLP(30), getMapMode()
+					.DPtoLP(40)));
+			this.addPoint(new Point(getMapMode().DPtoLP(40), getMapMode()
+					.DPtoLP(30)));
+			this.addPoint(new Point(getMapMode().DPtoLP(30), getMapMode()
+					.DPtoLP(40)));
+			this.addPoint(new Point(getMapMode().DPtoLP(0), getMapMode()
+					.DPtoLP(40)));
+			this.setFill(true);
 			this.setLineWidth(1);
 			createContents();
 		}
@@ -343,20 +369,78 @@ public class FileEditPart extends ShapeNodeEditPart {
 		/**
 		 * @generated
 		 */
-		private boolean myUseLocalCoordinates = false;
+		private final PointList myTemplate = new PointList();
+		/**
+		 * @generated
+		 */
+		private Rectangle myTemplateBounds;
 
 		/**
 		 * @generated
 		 */
-		protected boolean useLocalCoordinates() {
-			return myUseLocalCoordinates;
+		public void addPoint(Point point) {
+			myTemplate.addPoint(point);
+			myTemplateBounds = null;
 		}
 
 		/**
 		 * @generated
 		 */
-		protected void setUseLocalCoordinates(boolean useLocalCoordinates) {
-			myUseLocalCoordinates = useLocalCoordinates;
+		protected void fillShape(Graphics graphics) {
+			Rectangle bounds = getBounds();
+			graphics.pushState();
+			graphics.translate(bounds.x, bounds.y);
+			graphics.fillPolygon(scalePointList());
+			graphics.popState();
+		}
+
+		/**
+		 * @generated
+		 */
+		protected void outlineShape(Graphics graphics) {
+			Rectangle bounds = getBounds();
+			graphics.pushState();
+			graphics.translate(bounds.x, bounds.y);
+			graphics.drawPolygon(scalePointList());
+			graphics.popState();
+		}
+
+		/**
+		 * @generated
+		 */
+		private Rectangle getTemplateBounds() {
+			if (myTemplateBounds == null) {
+				myTemplateBounds = myTemplate.getBounds().getCopy().union(0, 0);
+				//just safety -- we are going to use this as divider 
+				if (myTemplateBounds.width < 1) {
+					myTemplateBounds.width = 1;
+				}
+				if (myTemplateBounds.height < 1) {
+					myTemplateBounds.height = 1;
+				}
+			}
+			return myTemplateBounds;
+		}
+
+		/**
+		 * @generated
+		 */
+		private int[] scalePointList() {
+			Rectangle pointsBounds = getTemplateBounds();
+			Rectangle actualBounds = getBounds();
+
+			float xScale = ((float) actualBounds.width) / pointsBounds.width;
+			float yScale = ((float) actualBounds.height) / pointsBounds.height;
+
+			if (xScale == 1 && yScale == 1) {
+				return myTemplate.toIntArray();
+			}
+			int[] scaled = (int[]) myTemplate.toIntArray().clone();
+			for (int i = 0; i < scaled.length; i += 2) {
+				scaled[i] = (int) Math.floor(scaled[i] * xScale);
+				scaled[i + 1] = (int) Math.floor(scaled[i + 1] * yScale);
+			}
+			return scaled;
 		}
 
 		/**

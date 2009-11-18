@@ -14,14 +14,32 @@
     <descriptors
         name="FileFigure">
       <actualFigure
-          xsi:type="gmfgraph:Rectangle"
+          xsi:type="gmfgraph:ScalablePolygon"
           name="FileFigure">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"/>
         <children
             xsi:type="gmfgraph:Label"
             name="FileNameFigure"
             text="&lt;...>"/>
+        <template/>
+        <template
+            x="40"/>
+        <template
+            x="40"
+            y="30"/>
+        <template
+            x="30"
+            y="30"/>
+        <template
+            x="30"
+            y="40"/>
+        <template
+            x="40"
+            y="30"/>
+        <template
+            x="30"
+            y="40"/>
+        <template
+            y="40"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
