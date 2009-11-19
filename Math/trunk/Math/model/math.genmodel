@@ -16,6 +16,7 @@
     <genClasses ecoreClass="math.ecore#//MinusOperator"/>
     <genClasses image="false" ecoreClass="math.ecore#//Number">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference math.ecore#//Number/operatorInputs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute math.ecore#//Number/value"/>
     </genClasses>
     <genClasses image="false" ecoreClass="math.ecore#//Operator">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference math.ecore#//Operator/inputs"/>

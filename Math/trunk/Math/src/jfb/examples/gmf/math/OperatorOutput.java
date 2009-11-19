@@ -28,10 +28,12 @@
 
 package jfb.examples.gmf.math;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * @model
  */
-public interface OperatorOutput {
+public interface OperatorOutput extends EObject {
 	
 	/**
 	 * @model
@@ -39,8 +41,28 @@ public interface OperatorOutput {
 	public Operator getOperator();
 
 	/**
+	 * Sets the value of the '{@link jfb.examples.gmf.math.OperatorOutput#getOperator <em>Operator</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Operator</em>' container reference.
+	 * @see #getOperator()
+	 * @generated
+	 */
+	void setOperator(Operator value);
+
+	/**
 	 * @model
 	 */
 	public Result getResult();
+
+	/**
+	 * Sets the value of the '{@link jfb.examples.gmf.math.OperatorOutput#getResult <em>Result</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Result</em>' reference.
+	 * @see #getResult()
+	 * @generated
+	 */
+	void setResult(Result value);
 
 }

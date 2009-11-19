@@ -28,26 +28,27 @@
 
 package jfb.examples.gmf.math;
 
-import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * @model
  */
-public interface MathDiagram {
+public interface MathDiagram extends EObject {
 	
 	/**
 	 * @model containment="true"
 	 */
-	public List<Operator> getOperators();
+	public EList<Operator> getOperators();
 	
 	/**
 	 * @model containment="true"
 	 */
-	public List<Entry> getEntries();
+	public EList<Entry> getEntries();
 
 	/**
 	 * @model containment="true"
 	 */
-	public List<Result> getResults();
+	public EList<Result> getResults();
 	
 }

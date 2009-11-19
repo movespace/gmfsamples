@@ -28,21 +28,32 @@
 
 package jfb.examples.gmf.math;
 
-import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * @model abstract="true"
  */
-public interface Operator {
+public interface Operator extends EObject {
 	
 	/**
 	 * @model containment="true"
 	 */
-	public List<OperatorInput> getInputs();
+	public EList<OperatorInput> getInputs();
 
 	/**
 	 * @model containment="true"
 	 */
 	public OperatorOutput getOutput();
+
+	/**
+	 * Sets the value of the '{@link jfb.examples.gmf.math.Operator#getOutput <em>Output</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Output</em>' containment reference.
+	 * @see #getOutput()
+	 * @generated
+	 */
+	void setOutput(OperatorOutput value);
 
 }

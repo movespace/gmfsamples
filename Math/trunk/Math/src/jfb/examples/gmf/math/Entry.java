@@ -31,6 +31,6 @@ package jfb.examples.gmf.math;
 /**
  * @model
  */
-public interface Entry extends Number {
+public interface Entry extends jfb.examples.gmf.math.Number {
 
 }

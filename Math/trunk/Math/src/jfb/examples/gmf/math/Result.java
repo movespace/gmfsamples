@@ -31,11 +31,21 @@ package jfb.examples.gmf.math;
 /**
  * @model
  */
-public interface Result extends Number {
+public interface Result extends jfb.examples.gmf.math.Number {
 	
 	/**
 	 * @model
 	 */
 	public OperatorOutput getOperatorOutput();
+
+	/**
+	 * Sets the value of the '{@link jfb.examples.gmf.math.Result#getOperatorOutput <em>Operator Output</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Operator Output</em>' reference.
+	 * @see #getOperatorOutput()
+	 * @generated
+	 */
+	void setOperatorOutput(OperatorOutput value);
 	
 }
