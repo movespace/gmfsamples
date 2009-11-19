@@ -29,10 +29,12 @@
 package jfb.examples.gmf.math.diagram.edit.parts;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import jfb.examples.gmf.math.OperatorInput;
 import jfb.examples.gmf.math.diagram.edit.parts.custom.AutomaticComputationHelper;
+import jfb.examples.gmf.math.diagram.edit.parts.custom.DefaultSizeNodeFigureWithFixedAnchors;
 import jfb.examples.gmf.math.diagram.edit.policies.OperatorInputItemSemanticEditPolicy;
 import jfb.examples.gmf.math.diagram.providers.MathElementTypes;
 
@@ -40,6 +42,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
+import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.gef.EditPart;
@@ -52,7 +55,6 @@ import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
-import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
@@ -152,10 +154,14 @@ public class OperatorInputEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected NodeFigure createNodePlate() {
-		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(40, 40);
+		HashMap<String, PrecisionPoint> anchorLocations = new HashMap<String, PrecisionPoint>();
+		// The anchor's location is a little bit on the left in order to be sure
+		// that the edges will be horizontally oriented
+		anchorLocations.put("CENTER", new PrecisionPoint(0.4d, 0.5d));
+		DefaultSizeNodeFigureWithFixedAnchors result = new DefaultSizeNodeFigureWithFixedAnchors(40, 40, anchorLocations); 
 		return result;
 	}
 

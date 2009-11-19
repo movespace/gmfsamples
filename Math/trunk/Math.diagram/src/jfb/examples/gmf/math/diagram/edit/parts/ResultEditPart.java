@@ -29,11 +29,13 @@
 package jfb.examples.gmf.math.diagram.edit.parts;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import jfb.examples.gmf.math.Number;
 import jfb.examples.gmf.math.Result;
 import jfb.examples.gmf.math.diagram.edit.parts.custom.AutomaticComputationHelper;
+import jfb.examples.gmf.math.diagram.edit.parts.custom.DefaultSizeNodeFigureWithFixedAnchors;
 import jfb.examples.gmf.math.diagram.edit.policies.ResultItemSemanticEditPolicy;
 import jfb.examples.gmf.math.diagram.part.MathVisualIDRegistry;
 import jfb.examples.gmf.math.diagram.providers.MathElementTypes;
@@ -43,6 +45,7 @@ import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
+import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EReference;
@@ -58,7 +61,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
-import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
@@ -208,13 +210,18 @@ public class ResultEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected NodeFigure createNodePlate() {
-		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(40, 40);
+		HashMap<String, PrecisionPoint> anchorLocations = new HashMap<String, PrecisionPoint>();
+		anchorLocations.put("WEST", new PrecisionPoint(0, 0.5d));
+		anchorLocations.put("EAST", new PrecisionPoint(1d, 0.5d));
+		anchorLocations.put("NORTH", new PrecisionPoint(0.5d, 0));
+		anchorLocations.put("SOUTH", new PrecisionPoint(0.5d, 1d));
+		DefaultSizeNodeFigureWithFixedAnchors result = new DefaultSizeNodeFigureWithFixedAnchors(40, 40, anchorLocations);
 		return result;
 	}
-
+	
 	/**
 	 * Creates figure for this edit part.
 	 * 

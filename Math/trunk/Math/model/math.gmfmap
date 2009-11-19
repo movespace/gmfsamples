@@ -146,4 +146,19 @@
     <palette
         href="math.gmftool#//@palette"/>
   </diagram>
+  <audits
+      id="MathAuditContainer"
+      name="MathAuditContainer">
+    <audits
+        name="CycleDetectorRule"
+        id="CycleDetectorRule"
+        message="A cycle has been detected">
+      <rule
+          body="CycleDetectorConstraint"
+          language="java"/>
+      <target
+          xsi:type="gmfmap:DiagramElementTarget"
+          element="//@links.1"/>
+    </audits>
+  </audits>
 </gmfmap:Mapping>
