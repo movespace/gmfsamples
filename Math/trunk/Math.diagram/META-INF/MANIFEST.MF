@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: jfb.examples.gmf.math.diagram.part.MathDiagramEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: jfb.examples.gmf.math.diagram.edit.parts, 
+Export-Package: jfb.examples.gmf.math.diagram.edit.parts,
  jfb.examples.gmf.math.diagram.part,
  jfb.examples.gmf.math.diagram.providers
 Require-Bundle: org.eclipse.core.runtime,

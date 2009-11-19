@@ -28,11 +28,15 @@
 
 package jfb.examples.gmf.math.diagram.edit.parts;
 
+import jfb.examples.gmf.math.diagram.edit.parts.custom.MinusRoundedRectangle;
+import jfb.examples.gmf.math.diagram.edit.parts.custom.OperatorCompartmentFigureListener;
 import jfb.examples.gmf.math.diagram.edit.policies.MinusOperatorMinusOperatorFigureCompartmentCanonicalEditPolicy;
 import jfb.examples.gmf.math.diagram.edit.policies.MinusOperatorMinusOperatorFigureCompartmentItemSemanticEditPolicy;
 import jfb.examples.gmf.math.diagram.part.Messages;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.XYLayout;
+import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ListCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
@@ -75,12 +79,31 @@ public class MinusOperatorMinusOperatorFigureCompartmentEditPart extends
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public IFigure createFigure() {
 		ResizableCompartmentFigure result = (ResizableCompartmentFigure) super
 				.createFigure();
 		result.setTitleVisibility(false);
+
+		// Setup for a XYLayout
+		IFigure contentPane = result.getContentPane();
+		contentPane.setLayoutManager(new XYLayout());
+
+		// Delete content pane insets
+		Insets is = contentPane.getInsets();
+		is.top = 0;
+		is.bottom = 0;
+		is.left = 0;
+		is.right = 0;
+
+		// Setup graphical elements
+		MinusRoundedRectangle roundedRectangle = new MinusRoundedRectangle();
+		contentPane.add(roundedRectangle);
+		
+		// Add the resize events listener
+		result.addFigureListener(new OperatorCompartmentFigureListener(this, roundedRectangle));
+
 		return result;
 	}
 
