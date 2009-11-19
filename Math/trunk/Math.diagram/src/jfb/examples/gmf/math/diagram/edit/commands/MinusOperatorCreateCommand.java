@@ -87,7 +87,7 @@ public class MinusOperatorCreateCommand extends EditElementCommand {
 		// Adds both operator inputs
 		newElement.getInputs().add(MathFactory.eINSTANCE.createOperatorInput());
 		newElement.getInputs().add(MathFactory.eINSTANCE.createOperatorInput());
- 
+
 		// Adds the operator output
 		newElement.setOutput(MathFactory.eINSTANCE.createOperatorOutput());
 

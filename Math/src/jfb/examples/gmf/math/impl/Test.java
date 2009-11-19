@@ -26,53 +26,31 @@
  * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package jfb.examples.gmf.math.diagram.part;
+package jfb.examples.gmf.math.impl;
 
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
-import org.eclipse.jface.action.GroupMarker;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IWorkbenchActionConstants;
-import org.eclipse.ui.IWorkbenchPage;
+import jfb.examples.gmf.math.Entry;
+import jfb.examples.gmf.math.MathFactory;
+import jfb.examples.gmf.math.PlusOperator;
 
-/**
- * @generated
- */
-public class MathDiagramActionBarContributor extends
-		DiagramActionBarContributor {
+public class Test {
 
 	/**
-	 * @generated
+	 * @param args
 	 */
-	protected Class getEditorClass() {
-		return MathDiagramEditor.class;
+	public static void main(String[] args) {
+		
+		
+		PlusOperator po = MathFactory.eINSTANCE.createPlusOperator();
+		System.out.println(po.getInputs().size());
+		System.out.println(po.getOutput());
+
+		Entry e = MathFactory.eINSTANCE.createEntry();
+		e.setValue(12);
+		System.out.println("number=" + po.getInputs().get(0).getNumber());
+		e.getOperatorInputs().add(po.getInputs().get(0));
+		
+		System.out.println("number=" + po.getInputs().get(0).getNumber());
+		
 	}
 
-	/**
-	 * @generated
-	 */
-	protected String getEditorId() {
-		return MathDiagramEditor.ID;
-	}
-
-	/**
-	 * @generated
-	 */
-	public void init(IActionBars bars, IWorkbenchPage page) {
-		super.init(bars, page);
-		// print preview
-		IMenuManager fileMenu = bars.getMenuManager().findMenuUsingPath(
-				IWorkbenchActionConstants.M_FILE);
-		assert fileMenu != null;
-		fileMenu.remove("pageSetupAction"); //$NON-NLS-1$
-		IMenuManager editMenu = bars.getMenuManager().findMenuUsingPath(
-				IWorkbenchActionConstants.M_EDIT);
-		assert editMenu != null;
-		if (editMenu.find("validationGroup") == null) { //$NON-NLS-1$
-			editMenu.add(new GroupMarker("validationGroup")); //$NON-NLS-1$
-		}
-		IAction validateAction = new ValidateAction(page);
-		editMenu.appendToGroup("validationGroup", validateAction); //$NON-NLS-1$
-	}
 }

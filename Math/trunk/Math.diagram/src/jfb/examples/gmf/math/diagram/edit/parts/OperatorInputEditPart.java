@@ -31,6 +31,8 @@ package jfb.examples.gmf.math.diagram.edit.parts;
 import java.util.ArrayList;
 import java.util.List;
 
+import jfb.examples.gmf.math.OperatorInput;
+import jfb.examples.gmf.math.diagram.edit.parts.custom.AutomaticComputationHelper;
 import jfb.examples.gmf.math.diagram.edit.policies.OperatorInputItemSemanticEditPolicy;
 import jfb.examples.gmf.math.diagram.providers.MathElementTypes;
 
@@ -38,6 +40,8 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
@@ -78,6 +82,21 @@ public class OperatorInputEditPart extends ShapeNodeEditPart {
 	 */
 	public OperatorInputEditPart(View view) {
 		super(view);
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	protected void handleNotificationEvent(Notification notification) {
+		super.handleNotificationEvent(notification);
+		if (notification.getNotifier() instanceof OperatorInput) {
+			if (notification.getFeature() instanceof EReference) {
+				String refName = ((EReference) notification.getFeature()).getName();
+				if ("number".equals(refName)) {
+					AutomaticComputationHelper.updateOperatorResult(((OperatorInput) notification.getNotifier()).getOperator());
+				}
+			}
+		}
 	}
 
 	/**

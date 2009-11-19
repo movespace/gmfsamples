@@ -31,6 +31,9 @@ package jfb.examples.gmf.math.diagram.edit.parts;
 import java.util.ArrayList;
 import java.util.List;
 
+import jfb.examples.gmf.math.Entry;
+import jfb.examples.gmf.math.Number;
+import jfb.examples.gmf.math.diagram.edit.parts.custom.AutomaticComputationHelper;
 import jfb.examples.gmf.math.diagram.edit.policies.EntryItemSemanticEditPolicy;
 import jfb.examples.gmf.math.diagram.part.MathVisualIDRegistry;
 import jfb.examples.gmf.math.diagram.providers.MathElementTypes;
@@ -40,6 +43,8 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
@@ -82,6 +87,19 @@ public class EntryEditPart extends ShapeNodeEditPart {
 	 */
 	public EntryEditPart(View view) {
 		super(view);
+	}
+
+	protected void handleNotificationEvent(Notification notification) {
+		super.handleNotificationEvent(notification);
+		System.out.println("entry.handleNotificationEvent(" + notification + ")");
+		if (notification.getNotifier() instanceof Entry) {
+			if (notification.getFeature() instanceof EAttribute) {
+				String attrName = ((EAttribute) notification.getFeature()).getName();
+				if ("value".equals(attrName)) {
+					AutomaticComputationHelper.numberValueChanged((Number) notification.getNotifier());
+				}
+			}
+		}
 	}
 
 	/**

@@ -334,6 +334,11 @@ public class MathBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		/**
 		 * @generated
 		 */
+		private static final String OPPOSITE_END_VAR = "oppositeEnd"; //$NON-NLS-1$
+
+		/**
+		 * @generated
+		 */
 		public static boolean canCreateNumberOperatorInputs_4001(Number source,
 				OperatorInput target) {
 			if (source != null) {

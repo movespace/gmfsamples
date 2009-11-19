@@ -101,9 +101,10 @@ public class PlusOperatorPlusOperatorFigureCompartmentEditPart extends
 		// Setup graphical elements
 		PlusRoundedRectangle roundedRectangle = new PlusRoundedRectangle();
 		contentPane.add(roundedRectangle);
-		
+
 		// Add the resize events listener
-		result.addFigureListener(new OperatorCompartmentFigureListener(this, roundedRectangle));
+		result.addFigureListener(new OperatorCompartmentFigureListener(this,
+				roundedRectangle));
 
 		return result;
 	}

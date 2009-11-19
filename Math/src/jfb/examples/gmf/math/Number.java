@@ -26,53 +26,45 @@
  * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package jfb.examples.gmf.math.diagram.part;
+package jfb.examples.gmf.math;
 
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
-import org.eclipse.jface.action.GroupMarker;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IWorkbenchActionConstants;
-import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
- * @generated
+ * @model abstract="true"
  */
-public class MathDiagramActionBarContributor extends
-		DiagramActionBarContributor {
+public interface Number extends EObject {
+	
+	/**
+	 * @model
+	 */
+	public EList<OperatorInput> getOperatorInputs();
 
 	/**
+	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Value</em>' attribute.
+	 * @see #setValue(double)
+	 * @see jfb.examples.gmf.math.MathPackage#getNumber_Value()
+	 * @model
 	 * @generated
 	 */
-	protected Class getEditorClass() {
-		return MathDiagramEditor.class;
-	}
+	double getValue();
 
 	/**
+	 * Sets the value of the '{@link jfb.examples.gmf.math.Number#getValue <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value</em>' attribute.
+	 * @see #getValue()
 	 * @generated
 	 */
-	protected String getEditorId() {
-		return MathDiagramEditor.ID;
-	}
+	void setValue(double value);
 
-	/**
-	 * @generated
-	 */
-	public void init(IActionBars bars, IWorkbenchPage page) {
-		super.init(bars, page);
-		// print preview
-		IMenuManager fileMenu = bars.getMenuManager().findMenuUsingPath(
-				IWorkbenchActionConstants.M_FILE);
-		assert fileMenu != null;
-		fileMenu.remove("pageSetupAction"); //$NON-NLS-1$
-		IMenuManager editMenu = bars.getMenuManager().findMenuUsingPath(
-				IWorkbenchActionConstants.M_EDIT);
-		assert editMenu != null;
-		if (editMenu.find("validationGroup") == null) { //$NON-NLS-1$
-			editMenu.add(new GroupMarker("validationGroup")); //$NON-NLS-1$
-		}
-		IAction validateAction = new ValidateAction(page);
-		editMenu.appendToGroup("validationGroup", validateAction); //$NON-NLS-1$
-	}
 }

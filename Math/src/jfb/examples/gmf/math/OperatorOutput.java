@@ -26,53 +26,43 @@
  * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package jfb.examples.gmf.math.diagram.part;
+package jfb.examples.gmf.math;
 
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
-import org.eclipse.jface.action.GroupMarker;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IWorkbenchActionConstants;
-import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.emf.ecore.EObject;
 
 /**
- * @generated
+ * @model
  */
-public class MathDiagramActionBarContributor extends
-		DiagramActionBarContributor {
+public interface OperatorOutput extends EObject {
+	
+	/**
+	 * @model
+	 */
+	public Operator getOperator();
 
 	/**
+	 * Sets the value of the '{@link jfb.examples.gmf.math.OperatorOutput#getOperator <em>Operator</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Operator</em>' container reference.
+	 * @see #getOperator()
 	 * @generated
 	 */
-	protected Class getEditorClass() {
-		return MathDiagramEditor.class;
-	}
+	void setOperator(Operator value);
 
 	/**
-	 * @generated
+	 * @model
 	 */
-	protected String getEditorId() {
-		return MathDiagramEditor.ID;
-	}
+	public Result getResult();
 
 	/**
+	 * Sets the value of the '{@link jfb.examples.gmf.math.OperatorOutput#getResult <em>Result</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Result</em>' reference.
+	 * @see #getResult()
 	 * @generated
 	 */
-	public void init(IActionBars bars, IWorkbenchPage page) {
-		super.init(bars, page);
-		// print preview
-		IMenuManager fileMenu = bars.getMenuManager().findMenuUsingPath(
-				IWorkbenchActionConstants.M_FILE);
-		assert fileMenu != null;
-		fileMenu.remove("pageSetupAction"); //$NON-NLS-1$
-		IMenuManager editMenu = bars.getMenuManager().findMenuUsingPath(
-				IWorkbenchActionConstants.M_EDIT);
-		assert editMenu != null;
-		if (editMenu.find("validationGroup") == null) { //$NON-NLS-1$
-			editMenu.add(new GroupMarker("validationGroup")); //$NON-NLS-1$
-		}
-		IAction validateAction = new ValidateAction(page);
-		editMenu.appendToGroup("validationGroup", validateAction); //$NON-NLS-1$
-	}
+	void setResult(Result value);
+
 }

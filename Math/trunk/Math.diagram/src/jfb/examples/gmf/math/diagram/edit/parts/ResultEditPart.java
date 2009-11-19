@@ -31,24 +31,26 @@ package jfb.examples.gmf.math.diagram.edit.parts;
 import java.util.ArrayList;
 import java.util.List;
 
+import jfb.examples.gmf.math.Number;
+import jfb.examples.gmf.math.Result;
+import jfb.examples.gmf.math.diagram.edit.parts.custom.AutomaticComputationHelper;
 import jfb.examples.gmf.math.diagram.edit.policies.ResultItemSemanticEditPolicy;
 import jfb.examples.gmf.math.diagram.part.MathVisualIDRegistry;
 import jfb.examples.gmf.math.diagram.providers.MathElementTypes;
 
-import org.eclipse.draw2d.BorderLayout;
 import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.FlowLayoutEditPolicy;
 import org.eclipse.gef.editpolicies.LayoutEditPolicy;
-import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
@@ -86,6 +88,24 @@ public class ResultEditPart extends ShapeNodeEditPart {
 	 */
 	public ResultEditPart(View view) {
 		super(view);
+	}
+
+	protected void handleNotificationEvent(Notification notification) {
+		super.handleNotificationEvent(notification);
+		if (notification.getNotifier() instanceof Result) {
+			if (notification.getFeature() instanceof EAttribute) {
+				String attrName = ((EAttribute) notification.getFeature()).getName();
+				if ("value".equals(attrName)) {
+					AutomaticComputationHelper.numberValueChanged((Number) notification.getNotifier());
+				}
+			}
+			else if (notification.getFeature() instanceof EReference) {
+				String refName = ((EReference) notification.getFeature()).getName();
+				if ("operatorOutput".equals(refName)) {
+					AutomaticComputationHelper.operatorOutputToResultConnectionChanged((Result) notification.getNotifier());
+				}
+			}
+		}
 	}
 
 	/**
@@ -352,9 +372,9 @@ public class ResultEditPart extends ShapeNodeEditPart {
 
 			FlowLayout layoutThis = new FlowLayout();
 			layoutThis.setStretchMinorAxis(false);
-			layoutThis.setMinorAlignment(FlowLayout.ALIGN_CENTER);
+			layoutThis.setMinorAlignment(FlowLayout.ALIGN_LEFTTOP);
 
-			layoutThis.setMajorAlignment(FlowLayout.ALIGN_CENTER);
+			layoutThis.setMajorAlignment(FlowLayout.ALIGN_LEFTTOP);
 			layoutThis.setMajorSpacing(5);
 			layoutThis.setMinorSpacing(5);
 			layoutThis.setHorizontal(true);

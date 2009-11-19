@@ -95,7 +95,7 @@ public class OperatorCompartmentFigureListener implements FigureListener {
 					else if (gEditPart instanceof OperatorInputEditPart) {
 						constraint = new Rectangle(
 								(int) (MARGIN * xScale),
-								firstInputProcessed ? (int) ((MARGIN + R) * yScale) : (int) ((MARGIN + R * 3) * yScale),
+								!firstInputProcessed ? (int) ((MARGIN + R) * yScale) : (int) ((MARGIN + R * 3) * yScale),
 								(int) (R * xScale), 
 								(int) (R * yScale));
 						contentPane.setConstraint(gEditPart.getFigure(), constraint);

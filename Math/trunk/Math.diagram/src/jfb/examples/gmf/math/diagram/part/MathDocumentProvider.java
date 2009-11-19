@@ -76,6 +76,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.internal.util.Diagram
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.operation.IRunnableContext;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Display;
@@ -622,6 +623,10 @@ public class MathDocumentProvider extends AbstractDocumentProvider implements
 				monitor.beginTask(
 						Messages.MathDocumentProvider_SaveDiagramTask, info
 								.getResourceSet().getResources().size() + 1); //"Saving diagram"
+
+				// Validation of the diagram and creation of markers if necessary 
+				ValidateAction.runValidation((View) document.getContent());
+
 				for (Iterator/*<org.eclipse.emf.ecore.resource.Resource>*/it = info
 						.getLoadedResourcesIterator(); it.hasNext();) {
 					Resource nextResource = (Resource) it.next();
