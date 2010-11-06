@@ -3,6 +3,8 @@ package jfb.examples.gmf.school.diagram.sheet;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import jfb.examples.gmf.school.ui.provider.SchoolPropertySource;
+
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
@@ -26,7 +28,7 @@ public class SchoolPropertySection extends AdvancedPropertySection implements
 		IPropertySourceProvider {
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public IPropertySource getPropertySource(Object object) {
 		if (object instanceof IPropertySource) {
@@ -37,7 +39,7 @@ public class SchoolPropertySection extends AdvancedPropertySection implements
 			IItemPropertySource ips = (IItemPropertySource) af.adapt(object,
 					IItemPropertySource.class);
 			if (ips != null) {
-				return new PropertySource(object, ips);
+				return new SchoolPropertySource(object, ips);
 			}
 		}
 		if (object instanceof IAdaptable) {

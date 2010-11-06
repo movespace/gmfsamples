@@ -35,5 +35,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.gmf.runtime.draw2d.ui;visibility:=reexport,
  School;visibility:=reexport,
  School.edit;visibility:=reexport,
- org.eclipse.gef;visibility:=reexport
+ org.eclipse.gef;visibility:=reexport,
+ School.edit.ui;bundle-version="1.0.0"
 Eclipse-LazyStart: true
