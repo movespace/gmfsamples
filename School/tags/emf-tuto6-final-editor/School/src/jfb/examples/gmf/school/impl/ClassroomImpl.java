@@ -8,18 +8,25 @@ package jfb.examples.gmf.school.impl;
 
 import java.util.Collection;
 
+import java.util.Map;
 import jfb.examples.gmf.school.Classroom;
 import jfb.examples.gmf.school.SchoolPackage;
 import jfb.examples.gmf.school.Student;
 
+import jfb.examples.gmf.school.util.SchoolValidator;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -117,6 +124,26 @@ public class ClassroomImpl extends EObjectImpl implements Classroom {
 			students = new EObjectContainmentEList<Student>(Student.class, this, SchoolPackage.CLASSROOM__STUDENTS);
 		}
 		return students;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validate(DiagnosticChain diagnostic, Map<Object, Object> context) {
+		boolean valid = true;
+		if (diagnostic != null) {
+			if (getStudents().size() == 0) {
+				valid = false;
+				diagnostic.add(new BasicDiagnostic(Diagnostic.ERROR,
+						SchoolValidator.DIAGNOSTIC_SOURCE,
+						SchoolValidator.CLASSROOM__VALIDATE, "The classroom '"
+								+ getName() + "' has no student.",
+						new Object[] { this }));
+			}
+		}
+		return valid;
 	}
 
 	/**

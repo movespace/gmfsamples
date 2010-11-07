@@ -1,5 +1,7 @@
 package jfb.examples.gmf.school;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -27,5 +29,13 @@ public interface Student extends EObject {
 	 * @model
 	 */
 	EList<Student> getFriends();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean validate(DiagnosticChain diagnostic, Map<Object, Object> context);
 
 }

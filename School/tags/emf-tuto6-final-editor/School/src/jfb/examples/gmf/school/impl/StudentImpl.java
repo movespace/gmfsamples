@@ -8,15 +8,22 @@ package jfb.examples.gmf.school.impl;
 
 import java.util.Collection;
 
+import java.util.Map;
 import jfb.examples.gmf.school.SchoolPackage;
 import jfb.examples.gmf.school.Student;
 
+import jfb.examples.gmf.school.util.SchoolValidator;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -113,6 +120,26 @@ public class StudentImpl extends EObjectImpl implements Student {
 			friends = new EObjectResolvingEList<Student>(Student.class, this, SchoolPackage.STUDENT__FRIENDS);
 		}
 		return friends;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validate(DiagnosticChain diagnostic, Map<Object, Object> context) {
+		boolean valid = true;
+		if (diagnostic != null) {
+			if (getFriends().size() == 0) {
+				valid = false;
+				diagnostic.add(new BasicDiagnostic(Diagnostic.WARNING,
+						SchoolValidator.DIAGNOSTIC_SOURCE,
+						SchoolValidator.STUDENT__VALIDATE, "The student '"
+								+ getName() + "' has no friend.",
+						new Object[] { this }));
+			}
+		}
+		return valid;
 	}
 
 	/**
