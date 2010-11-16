@@ -27,7 +27,7 @@ import org.eclipse.swt.graphics.Image;
 /**
  * @generated
  */
-public class SchoolElementTypes extends ElementInitializers {
+public class SchoolElementTypes {
 
 	/**
 	 * @generated
@@ -38,7 +38,7 @@ public class SchoolElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	private static Map elements;
+	private static Map<IElementType, ENamedElement> elements;
 
 	/**
 	 * @generated
@@ -48,7 +48,7 @@ public class SchoolElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	private static Set KNOWN_ELEMENT_TYPES;
+	private static Set<IElementType> KNOWN_ELEMENT_TYPES;
 
 	/**
 	 * @generated
@@ -180,19 +180,18 @@ public class SchoolElementTypes extends ElementInitializers {
 	public static ENamedElement getElement(IAdaptable hint) {
 		Object type = hint.getAdapter(IElementType.class);
 		if (elements == null) {
-			elements = new IdentityHashMap();
+			elements = new IdentityHashMap<IElementType, ENamedElement>();
 
 			elements.put(Diagram_1000, SchoolPackage.eINSTANCE.getDiagram());
 
 			elements.put(School_2001, SchoolPackage.eINSTANCE.getSchool());
 
-			elements
-					.put(Classroom_3001, SchoolPackage.eINSTANCE.getClassroom());
+			elements.put(Classroom_3001, SchoolPackage.eINSTANCE.getClassroom());
 
 			elements.put(Student_3002, SchoolPackage.eINSTANCE.getStudent());
 
-			elements.put(StudentFriends_4001, SchoolPackage.eINSTANCE
-					.getStudent_Friends());
+			elements.put(StudentFriends_4001,
+					SchoolPackage.eINSTANCE.getStudent_Friends());
 		}
 		return (ENamedElement) elements.get(type);
 	}
@@ -209,7 +208,7 @@ public class SchoolElementTypes extends ElementInitializers {
 	 */
 	public static boolean isKnownElementType(IElementType elementType) {
 		if (KNOWN_ELEMENT_TYPES == null) {
-			KNOWN_ELEMENT_TYPES = new HashSet();
+			KNOWN_ELEMENT_TYPES = new HashSet<IElementType>();
 			KNOWN_ELEMENT_TYPES.add(Diagram_1000);
 			KNOWN_ELEMENT_TYPES.add(School_2001);
 			KNOWN_ELEMENT_TYPES.add(Classroom_3001);

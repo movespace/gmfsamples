@@ -79,13 +79,40 @@ public interface SchoolPackage extends EPackage {
 	int CLASSROOM__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Teacher</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSROOM__TEACHER = 1;
+
+	/**
+	 * The feature id for the '<em><b>Rank</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSROOM__RANK = 2;
+
+	/**
+	 * The feature id for the '<em><b>Capacity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSROOM__CAPACITY = 3;
+
+	/**
 	 * The feature id for the '<em><b>Students</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASSROOM__STUDENTS = 1;
+	int CLASSROOM__STUDENTS = 4;
 
 	/**
 	 * The number of structural features of the '<em>Classroom</em>' class.
@@ -94,7 +121,7 @@ public interface SchoolPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASSROOM_FEATURE_COUNT = 2;
+	int CLASSROOM_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link jfb.examples.gmf.school.impl.DiagramImpl <em>Diagram</em>}' class.
@@ -144,13 +171,40 @@ public interface SchoolPackage extends EPackage {
 	int SCHOOL__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Director</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHOOL__DIRECTOR = 1;
+
+	/**
+	 * The feature id for the '<em><b>Zip Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHOOL__ZIP_CODE = 2;
+
+	/**
+	 * The feature id for the '<em><b>City</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHOOL__CITY = 3;
+
+	/**
 	 * The feature id for the '<em><b>Classrooms</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCHOOL__CLASSROOMS = 1;
+	int SCHOOL__CLASSROOMS = 4;
 
 	/**
 	 * The number of structural features of the '<em>School</em>' class.
@@ -159,7 +213,7 @@ public interface SchoolPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHOOL_FEATURE_COUNT = 2;
+	int SCHOOL_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link jfb.examples.gmf.school.impl.StudentImpl <em>Student</em>}' class.
@@ -181,13 +235,31 @@ public interface SchoolPackage extends EPackage {
 	int STUDENT__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Nickname</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STUDENT__NICKNAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Age</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STUDENT__AGE = 2;
+
+	/**
 	 * The feature id for the '<em><b>Friends</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STUDENT__FRIENDS = 1;
+	int STUDENT__FRIENDS = 3;
 
 	/**
 	 * The number of structural features of the '<em>Student</em>' class.
@@ -196,7 +268,7 @@ public interface SchoolPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STUDENT_FEATURE_COUNT = 2;
+	int STUDENT_FEATURE_COUNT = 4;
 
 
 	/**
@@ -230,6 +302,39 @@ public interface SchoolPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassroom_Students();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jfb.examples.gmf.school.Classroom#getCapacity <em>Capacity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Capacity</em>'.
+	 * @see jfb.examples.gmf.school.Classroom#getCapacity()
+	 * @see #getClassroom()
+	 * @generated
+	 */
+	EAttribute getClassroom_Capacity();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jfb.examples.gmf.school.Classroom#getTeacher <em>Teacher</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Teacher</em>'.
+	 * @see jfb.examples.gmf.school.Classroom#getTeacher()
+	 * @see #getClassroom()
+	 * @generated
+	 */
+	EAttribute getClassroom_Teacher();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jfb.examples.gmf.school.Classroom#getRank <em>Rank</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Rank</em>'.
+	 * @see jfb.examples.gmf.school.Classroom#getRank()
+	 * @see #getClassroom()
+	 * @generated
+	 */
+	EAttribute getClassroom_Rank();
 
 	/**
 	 * Returns the meta object for class '{@link jfb.examples.gmf.school.Diagram <em>Diagram</em>}'.
@@ -285,6 +390,39 @@ public interface SchoolPackage extends EPackage {
 	EReference getSchool_Classrooms();
 
 	/**
+	 * Returns the meta object for the attribute '{@link jfb.examples.gmf.school.School#getCity <em>City</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>City</em>'.
+	 * @see jfb.examples.gmf.school.School#getCity()
+	 * @see #getSchool()
+	 * @generated
+	 */
+	EAttribute getSchool_City();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jfb.examples.gmf.school.School#getZipCode <em>Zip Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Zip Code</em>'.
+	 * @see jfb.examples.gmf.school.School#getZipCode()
+	 * @see #getSchool()
+	 * @generated
+	 */
+	EAttribute getSchool_ZipCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jfb.examples.gmf.school.School#getDirector <em>Director</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Director</em>'.
+	 * @see jfb.examples.gmf.school.School#getDirector()
+	 * @see #getSchool()
+	 * @generated
+	 */
+	EAttribute getSchool_Director();
+
+	/**
 	 * Returns the meta object for class '{@link jfb.examples.gmf.school.Student <em>Student</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -315,6 +453,28 @@ public interface SchoolPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getStudent_Friends();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jfb.examples.gmf.school.Student#getAge <em>Age</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Age</em>'.
+	 * @see jfb.examples.gmf.school.Student#getAge()
+	 * @see #getStudent()
+	 * @generated
+	 */
+	EAttribute getStudent_Age();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jfb.examples.gmf.school.Student#getNickname <em>Nickname</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Nickname</em>'.
+	 * @see jfb.examples.gmf.school.Student#getNickname()
+	 * @see #getStudent()
+	 * @generated
+	 */
+	EAttribute getStudent_Nickname();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -365,6 +525,30 @@ public interface SchoolPackage extends EPackage {
 		EReference CLASSROOM__STUDENTS = eINSTANCE.getClassroom_Students();
 
 		/**
+		 * The meta object literal for the '<em><b>Capacity</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASSROOM__CAPACITY = eINSTANCE.getClassroom_Capacity();
+
+		/**
+		 * The meta object literal for the '<em><b>Teacher</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASSROOM__TEACHER = eINSTANCE.getClassroom_Teacher();
+
+		/**
+		 * The meta object literal for the '<em><b>Rank</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASSROOM__RANK = eINSTANCE.getClassroom_Rank();
+
+		/**
 		 * The meta object literal for the '{@link jfb.examples.gmf.school.impl.DiagramImpl <em>Diagram</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -409,6 +593,30 @@ public interface SchoolPackage extends EPackage {
 		EReference SCHOOL__CLASSROOMS = eINSTANCE.getSchool_Classrooms();
 
 		/**
+		 * The meta object literal for the '<em><b>City</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCHOOL__CITY = eINSTANCE.getSchool_City();
+
+		/**
+		 * The meta object literal for the '<em><b>Zip Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCHOOL__ZIP_CODE = eINSTANCE.getSchool_ZipCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Director</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCHOOL__DIRECTOR = eINSTANCE.getSchool_Director();
+
+		/**
 		 * The meta object literal for the '{@link jfb.examples.gmf.school.impl.StudentImpl <em>Student</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -433,6 +641,22 @@ public interface SchoolPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STUDENT__FRIENDS = eINSTANCE.getStudent_Friends();
+
+		/**
+		 * The meta object literal for the '<em><b>Age</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STUDENT__AGE = eINSTANCE.getStudent_Age();
+
+		/**
+		 * The meta object literal for the '<em><b>Nickname</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STUDENT__NICKNAME = eINSTANCE.getStudent_Nickname();
 
 	}
 

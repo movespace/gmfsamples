@@ -1,6 +1,6 @@
 package jfb.examples.gmf.school.diagram.part;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import jfb.examples.gmf.school.diagram.providers.SchoolElementTypes;
@@ -12,6 +12,7 @@ import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.palette.ToolEntry;
 import org.eclipse.gmf.runtime.diagram.ui.tools.UnspecifiedTypeConnectionTool;
 import org.eclipse.gmf.runtime.diagram.ui.tools.UnspecifiedTypeCreationTool;
+import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 
 /**
  * @generated
@@ -43,11 +44,10 @@ public class SchoolPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createClassroom1CreationTool() {
-		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(SchoolElementTypes.Classroom_3001);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Classroom1CreationTool_title,
-				Messages.Classroom1CreationTool_desc, types);
+				Messages.Classroom1CreationTool_desc,
+				Collections.singletonList(SchoolElementTypes.Classroom_3001));
 		entry.setId("createClassroom1CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(SchoolElementTypes
 				.getImageDescriptor(SchoolElementTypes.Classroom_3001));
@@ -59,11 +59,10 @@ public class SchoolPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createStudent2CreationTool() {
-		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(SchoolElementTypes.Student_3002);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Student2CreationTool_title,
-				Messages.Student2CreationTool_desc, types);
+				Messages.Student2CreationTool_desc,
+				Collections.singletonList(SchoolElementTypes.Student_3002));
 		entry.setId("createStudent2CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(SchoolElementTypes
 				.getImageDescriptor(SchoolElementTypes.Student_3002));
@@ -75,11 +74,11 @@ public class SchoolPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createStudentFriends3CreationTool() {
-		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(SchoolElementTypes.StudentFriends_4001);
 		LinkToolEntry entry = new LinkToolEntry(
 				Messages.StudentFriends3CreationTool_title,
-				Messages.StudentFriends3CreationTool_desc, types);
+				Messages.StudentFriends3CreationTool_desc,
+				Collections
+						.singletonList(SchoolElementTypes.StudentFriends_4001));
 		entry.setId("createStudentFriends3CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(SchoolElementTypes
 				.getImageDescriptor(SchoolElementTypes.StudentFriends_4001));
@@ -95,13 +94,13 @@ public class SchoolPaletteFactory {
 		/**
 		 * @generated
 		 */
-		private final List elementTypes;
+		private final List<IElementType> elementTypes;
 
 		/**
 		 * @generated
 		 */
 		private NodeToolEntry(String title, String description,
-				List elementTypes) {
+				List<IElementType> elementTypes) {
 			super(title, description, null, null);
 			this.elementTypes = elementTypes;
 		}
@@ -124,13 +123,13 @@ public class SchoolPaletteFactory {
 		/**
 		 * @generated
 		 */
-		private final List relationshipTypes;
+		private final List<IElementType> relationshipTypes;
 
 		/**
 		 * @generated
 		 */
 		private LinkToolEntry(String title, String description,
-				List relationshipTypes) {
+				List<IElementType> relationshipTypes) {
 			super(title, description, null, null);
 			this.relationshipTypes = relationshipTypes;
 		}

@@ -12,11 +12,15 @@ import jfb.examples.gmf.school.School;
 import jfb.examples.gmf.school.SchoolFactory;
 import jfb.examples.gmf.school.SchoolPackage;
 import jfb.examples.gmf.school.Student;
+import jfb.examples.gmf.school.util.SchoolValidator;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -106,6 +110,15 @@ public class SchoolPackageImpl extends EPackageImpl implements SchoolPackage {
 		// Initialize created meta-data
 		theSchoolPackage.initializePackageContents();
 
+		// Register package validator
+		EValidator.Registry.INSTANCE.put
+			(theSchoolPackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return SchoolValidator.INSTANCE;
+				 }
+			 });
+
 		// Mark meta-data to indicate it can't be changed
 		theSchoolPackage.freeze();
 
@@ -139,7 +152,34 @@ public class SchoolPackageImpl extends EPackageImpl implements SchoolPackage {
 	 * @generated
 	 */
 	public EReference getClassroom_Students() {
-		return (EReference)classroomEClass.getEStructuralFeatures().get(1);
+		return (EReference)classroomEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getClassroom_Capacity() {
+		return (EAttribute)classroomEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getClassroom_Teacher() {
+		return (EAttribute)classroomEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getClassroom_Rank() {
+		return (EAttribute)classroomEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -184,7 +224,34 @@ public class SchoolPackageImpl extends EPackageImpl implements SchoolPackage {
 	 * @generated
 	 */
 	public EReference getSchool_Classrooms() {
-		return (EReference)schoolEClass.getEStructuralFeatures().get(1);
+		return (EReference)schoolEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSchool_City() {
+		return (EAttribute)schoolEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSchool_ZipCode() {
+		return (EAttribute)schoolEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSchool_Director() {
+		return (EAttribute)schoolEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -211,7 +278,25 @@ public class SchoolPackageImpl extends EPackageImpl implements SchoolPackage {
 	 * @generated
 	 */
 	public EReference getStudent_Friends() {
-		return (EReference)studentEClass.getEStructuralFeatures().get(1);
+		return (EReference)studentEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStudent_Age() {
+		return (EAttribute)studentEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStudent_Nickname() {
+		return (EAttribute)studentEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -244,6 +329,9 @@ public class SchoolPackageImpl extends EPackageImpl implements SchoolPackage {
 		// Create classes and their features
 		classroomEClass = createEClass(CLASSROOM);
 		createEAttribute(classroomEClass, CLASSROOM__NAME);
+		createEAttribute(classroomEClass, CLASSROOM__TEACHER);
+		createEAttribute(classroomEClass, CLASSROOM__RANK);
+		createEAttribute(classroomEClass, CLASSROOM__CAPACITY);
 		createEReference(classroomEClass, CLASSROOM__STUDENTS);
 
 		diagramEClass = createEClass(DIAGRAM);
@@ -251,10 +339,15 @@ public class SchoolPackageImpl extends EPackageImpl implements SchoolPackage {
 
 		schoolEClass = createEClass(SCHOOL);
 		createEAttribute(schoolEClass, SCHOOL__NAME);
+		createEAttribute(schoolEClass, SCHOOL__DIRECTOR);
+		createEAttribute(schoolEClass, SCHOOL__ZIP_CODE);
+		createEAttribute(schoolEClass, SCHOOL__CITY);
 		createEReference(schoolEClass, SCHOOL__CLASSROOMS);
 
 		studentEClass = createEClass(STUDENT);
 		createEAttribute(studentEClass, STUDENT__NAME);
+		createEAttribute(studentEClass, STUDENT__NICKNAME);
+		createEAttribute(studentEClass, STUDENT__AGE);
 		createEReference(studentEClass, STUDENT__FRIENDS);
 	}
 
@@ -290,18 +383,44 @@ public class SchoolPackageImpl extends EPackageImpl implements SchoolPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(classroomEClass, Classroom.class, "Classroom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getClassroom_Name(), ecorePackage.getEString(), "name", null, 0, 1, Classroom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClassroom_Teacher(), ecorePackage.getEString(), "teacher", null, 0, 1, Classroom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClassroom_Rank(), ecorePackage.getEInt(), "rank", null, 0, 1, Classroom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClassroom_Capacity(), ecorePackage.getEInt(), "capacity", null, 0, 1, Classroom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassroom_Students(), this.getStudent(), null, "students", null, 0, -1, Classroom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		EOperation op = addEOperation(classroomEClass, ecorePackage.getEBoolean(), "validate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostic", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
+		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(diagramEClass, Diagram.class, "Diagram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDiagram_School(), this.getSchool(), null, "school", null, 0, 1, Diagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(schoolEClass, School.class, "School", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSchool_Name(), ecorePackage.getEString(), "name", null, 0, 1, School.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSchool_Director(), ecorePackage.getEString(), "director", null, 0, 1, School.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSchool_ZipCode(), ecorePackage.getEString(), "zipCode", null, 0, 1, School.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSchool_City(), ecorePackage.getEString(), "city", null, 0, 1, School.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSchool_Classrooms(), this.getClassroom(), null, "classrooms", null, 0, -1, School.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(studentEClass, Student.class, "Student", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStudent_Name(), ecorePackage.getEString(), "name", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStudent_Nickname(), ecorePackage.getEString(), "nickname", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStudent_Age(), ecorePackage.getEInt(), "age", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStudent_Friends(), this.getStudent(), null, "friends", null, 0, -1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(studentEClass, ecorePackage.getEBoolean(), "validate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostic", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

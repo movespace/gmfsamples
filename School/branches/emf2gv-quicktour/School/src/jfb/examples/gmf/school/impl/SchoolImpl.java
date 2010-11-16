@@ -30,6 +30,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link jfb.examples.gmf.school.impl.SchoolImpl#getName <em>Name</em>}</li>
+ *   <li>{@link jfb.examples.gmf.school.impl.SchoolImpl#getDirector <em>Director</em>}</li>
+ *   <li>{@link jfb.examples.gmf.school.impl.SchoolImpl#getZipCode <em>Zip Code</em>}</li>
+ *   <li>{@link jfb.examples.gmf.school.impl.SchoolImpl#getCity <em>City</em>}</li>
  *   <li>{@link jfb.examples.gmf.school.impl.SchoolImpl#getClassrooms <em>Classrooms</em>}</li>
  * </ul>
  * </p>
@@ -56,6 +59,66 @@ public class SchoolImpl extends EObjectImpl implements School {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDirector() <em>Director</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDirector()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DIRECTOR_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDirector() <em>Director</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDirector()
+	 * @generated
+	 * @ordered
+	 */
+	protected String director = DIRECTOR_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getZipCode() <em>Zip Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getZipCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ZIP_CODE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getZipCode() <em>Zip Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getZipCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected String zipCode = ZIP_CODE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getCity() <em>City</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCity()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CITY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCity() <em>City</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCity()
+	 * @generated
+	 * @ordered
+	 */
+	protected String city = CITY_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getClassrooms() <em>Classrooms</em>}' containment reference list.
@@ -124,6 +187,69 @@ public class SchoolImpl extends EObjectImpl implements School {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getCity() {
+		return city;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCity(String newCity) {
+		String oldCity = city;
+		city = newCity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SchoolPackage.SCHOOL__CITY, oldCity, city));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setZipCode(String newZipCode) {
+		String oldZipCode = zipCode;
+		zipCode = newZipCode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SchoolPackage.SCHOOL__ZIP_CODE, oldZipCode, zipCode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDirector() {
+		return director;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDirector(String newDirector) {
+		String oldDirector = director;
+		director = newDirector;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SchoolPackage.SCHOOL__DIRECTOR, oldDirector, director));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -143,6 +269,12 @@ public class SchoolImpl extends EObjectImpl implements School {
 		switch (featureID) {
 			case SchoolPackage.SCHOOL__NAME:
 				return getName();
+			case SchoolPackage.SCHOOL__DIRECTOR:
+				return getDirector();
+			case SchoolPackage.SCHOOL__ZIP_CODE:
+				return getZipCode();
+			case SchoolPackage.SCHOOL__CITY:
+				return getCity();
 			case SchoolPackage.SCHOOL__CLASSROOMS:
 				return getClassrooms();
 		}
@@ -160,6 +292,15 @@ public class SchoolImpl extends EObjectImpl implements School {
 		switch (featureID) {
 			case SchoolPackage.SCHOOL__NAME:
 				setName((String)newValue);
+				return;
+			case SchoolPackage.SCHOOL__DIRECTOR:
+				setDirector((String)newValue);
+				return;
+			case SchoolPackage.SCHOOL__ZIP_CODE:
+				setZipCode((String)newValue);
+				return;
+			case SchoolPackage.SCHOOL__CITY:
+				setCity((String)newValue);
 				return;
 			case SchoolPackage.SCHOOL__CLASSROOMS:
 				getClassrooms().clear();
@@ -180,6 +321,15 @@ public class SchoolImpl extends EObjectImpl implements School {
 			case SchoolPackage.SCHOOL__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case SchoolPackage.SCHOOL__DIRECTOR:
+				setDirector(DIRECTOR_EDEFAULT);
+				return;
+			case SchoolPackage.SCHOOL__ZIP_CODE:
+				setZipCode(ZIP_CODE_EDEFAULT);
+				return;
+			case SchoolPackage.SCHOOL__CITY:
+				setCity(CITY_EDEFAULT);
+				return;
 			case SchoolPackage.SCHOOL__CLASSROOMS:
 				getClassrooms().clear();
 				return;
@@ -197,6 +347,12 @@ public class SchoolImpl extends EObjectImpl implements School {
 		switch (featureID) {
 			case SchoolPackage.SCHOOL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case SchoolPackage.SCHOOL__DIRECTOR:
+				return DIRECTOR_EDEFAULT == null ? director != null : !DIRECTOR_EDEFAULT.equals(director);
+			case SchoolPackage.SCHOOL__ZIP_CODE:
+				return ZIP_CODE_EDEFAULT == null ? zipCode != null : !ZIP_CODE_EDEFAULT.equals(zipCode);
+			case SchoolPackage.SCHOOL__CITY:
+				return CITY_EDEFAULT == null ? city != null : !CITY_EDEFAULT.equals(city);
 			case SchoolPackage.SCHOOL__CLASSROOMS:
 				return classrooms != null && !classrooms.isEmpty();
 		}
@@ -215,6 +371,12 @@ public class SchoolImpl extends EObjectImpl implements School {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", director: ");
+		result.append(director);
+		result.append(", zipCode: ");
+		result.append(zipCode);
+		result.append(", city: ");
+		result.append(city);
 		result.append(')');
 		return result.toString();
 	}

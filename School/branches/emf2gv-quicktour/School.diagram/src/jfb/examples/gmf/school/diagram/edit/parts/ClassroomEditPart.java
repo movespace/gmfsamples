@@ -70,7 +70,7 @@ public class ClassroomEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected LayoutEditPolicy createLayoutEditPolicy() {
-		LayoutEditPolicy lep = new LayoutEditPolicy() {
+		org.eclipse.gmf.runtime.diagram.ui.editpolicies.LayoutEditPolicy lep = new org.eclipse.gmf.runtime.diagram.ui.editpolicies.LayoutEditPolicy() {
 
 			protected EditPolicy createChildEditPolicy(EditPart child) {
 				EditPolicy result = child
@@ -96,8 +96,7 @@ public class ClassroomEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createNodeShape() {
-		ClassroomFigure figure = new ClassroomFigure();
-		return primaryShape = figure;
+		return primaryShape = new ClassroomFigure();
 	}
 
 	/**
@@ -120,9 +119,8 @@ public class ClassroomEditPart extends ShapeNodeEditPart {
 			IFigure pane = getPrimaryShape()
 					.getFigureClassroomCompartmentFigure();
 			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
-			pane
-					.add(((ClassroomClassroomStudentsCompartmentEditPart) childEditPart)
-							.getFigure());
+			pane.add(((ClassroomClassroomStudentsCompartmentEditPart) childEditPart)
+					.getFigure());
 			return true;
 		}
 		return false;
@@ -139,9 +137,8 @@ public class ClassroomEditPart extends ShapeNodeEditPart {
 			IFigure pane = getPrimaryShape()
 					.getFigureClassroomCompartmentFigure();
 			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
-			pane
-					.remove(((ClassroomClassroomStudentsCompartmentEditPart) childEditPart)
-							.getFigure());
+			pane.remove(((ClassroomClassroomStudentsCompartmentEditPart) childEditPart)
+					.getFigure());
 			return true;
 		}
 		return false;
@@ -295,7 +292,6 @@ public class ClassroomEditPart extends ShapeNodeEditPart {
 
 			this.setCornerDimensions(new Dimension(getMapMode().DPtoLP(8),
 					getMapMode().DPtoLP(8)));
-			this.setLineWidth(1);
 			createContents();
 		}
 
@@ -310,29 +306,9 @@ public class ClassroomEditPart extends ShapeNodeEditPart {
 			this.add(fFigureClassroomNameFigure, BorderLayout.TOP);
 
 			fFigureClassroomCompartmentFigure = new RectangleFigure();
-			fFigureClassroomCompartmentFigure.setLineWidth(1);
 
 			this.add(fFigureClassroomCompartmentFigure, BorderLayout.CENTER);
 
-		}
-
-		/**
-		 * @generated
-		 */
-		private boolean myUseLocalCoordinates = false;
-
-		/**
-		 * @generated
-		 */
-		protected boolean useLocalCoordinates() {
-			return myUseLocalCoordinates;
-		}
-
-		/**
-		 * @generated
-		 */
-		protected void setUseLocalCoordinates(boolean useLocalCoordinates) {
-			myUseLocalCoordinates = useLocalCoordinates;
 		}
 
 		/**

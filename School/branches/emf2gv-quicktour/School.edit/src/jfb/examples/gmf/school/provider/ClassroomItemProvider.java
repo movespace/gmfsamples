@@ -16,11 +16,8 @@ import jfb.examples.gmf.school.SchoolPackage;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -68,6 +65,9 @@ public class ClassroomItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addTeacherPropertyDescriptor(object);
+			addRankPropertyDescriptor(object);
+			addCapacityPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,6 +90,72 @@ public class ClassroomItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Capacity feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCapacityPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Classroom_capacity_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Classroom_capacity_feature", "_UI_Classroom_type"),
+				 SchoolPackage.Literals.CLASSROOM__CAPACITY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Teacher feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTeacherPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Classroom_teacher_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Classroom_teacher_feature", "_UI_Classroom_type"),
+				 SchoolPackage.Literals.CLASSROOM__TEACHER,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Rank feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRankPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Classroom_rank_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Classroom_rank_feature", "_UI_Classroom_type"),
+				 SchoolPackage.Literals.CLASSROOM__RANK,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -162,6 +228,9 @@ public class ClassroomItemProvider
 
 		switch (notification.getFeatureID(Classroom.class)) {
 			case SchoolPackage.CLASSROOM__NAME:
+			case SchoolPackage.CLASSROOM__TEACHER:
+			case SchoolPackage.CLASSROOM__RANK:
+			case SchoolPackage.CLASSROOM__CAPACITY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SchoolPackage.CLASSROOM__STUDENTS:

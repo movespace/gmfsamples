@@ -2,7 +2,6 @@ package jfb.examples.gmf.school.diagram.part;
 
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.List;
 
 import jfb.examples.gmf.school.diagram.edit.parts.DiagramEditPart;
 
@@ -108,7 +107,7 @@ public class SchoolNewDiagramFileWizard extends Wizard {
 	 * @generated
 	 */
 	public boolean performFinish() {
-		List affectedFiles = new LinkedList();
+		LinkedList<IFile> affectedFiles = new LinkedList<IFile>();
 		IFile diagramFile = myFileCreationPage.createNewFile();
 		SchoolDiagramEditorUtil.setCharset(diagramFile);
 		affectedFiles.add(diagramFile);

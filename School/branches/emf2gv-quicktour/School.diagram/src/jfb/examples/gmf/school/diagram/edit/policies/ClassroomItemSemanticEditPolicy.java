@@ -60,16 +60,16 @@ public class ClassroomItemSemanticEditPolicy extends
 	 */
 	private void addDestroyChildNodesCommand(ICompositeCommand cmd) {
 		View view = (View) getHost().getModel();
-		for (Iterator nit = view.getChildren().iterator(); nit.hasNext();) {
+		for (Iterator<?> nit = view.getChildren().iterator(); nit.hasNext();) {
 			Node node = (Node) nit.next();
 			switch (SchoolVisualIDRegistry.getVisualID(node)) {
 			case ClassroomClassroomStudentsCompartmentEditPart.VISUAL_ID:
-				for (Iterator cit = node.getChildren().iterator(); cit
+				for (Iterator<?> cit = node.getChildren().iterator(); cit
 						.hasNext();) {
 					Node cnode = (Node) cit.next();
 					switch (SchoolVisualIDRegistry.getVisualID(cnode)) {
 					case StudentEditPart.VISUAL_ID:
-						for (Iterator it = cnode.getTargetEdges().iterator(); it
+						for (Iterator<?> it = cnode.getTargetEdges().iterator(); it
 								.hasNext();) {
 							Edge incomingLink = (Edge) it.next();
 							if (SchoolVisualIDRegistry
@@ -84,7 +84,7 @@ public class ClassroomItemSemanticEditPolicy extends
 								continue;
 							}
 						}
-						for (Iterator it = cnode.getSourceEdges().iterator(); it
+						for (Iterator<?> it = cnode.getSourceEdges().iterator(); it
 								.hasNext();) {
 							Edge outgoingLink = (Edge) it.next();
 							if (SchoolVisualIDRegistry

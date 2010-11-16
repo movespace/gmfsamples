@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import jfb.examples.gmf.school.Student;
 import jfb.examples.gmf.school.diagram.edit.helpers.SchoolBaseEditHelper;
+import jfb.examples.gmf.school.diagram.part.SchoolDiagramEditorPlugin;
 import jfb.examples.gmf.school.diagram.part.SchoolVisualIDRegistry;
 import jfb.examples.gmf.school.diagram.providers.SchoolElementTypes;
 
@@ -73,8 +74,8 @@ public class SchoolBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 			Object view = ((ReconnectRequest) request).getConnectionEditPart()
 					.getModel();
 			if (view instanceof View) {
-				Integer id = new Integer(SchoolVisualIDRegistry
-						.getVisualID((View) view));
+				Integer id = new Integer(
+						SchoolVisualIDRegistry.getVisualID((View) view));
 				request.getExtendedData().put(VISUAL_ID_KEY, id);
 			}
 		}
@@ -124,8 +125,7 @@ public class SchoolBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 			Command editPolicyCommand) {
 		if (editPolicyCommand != null) {
 			ICommand command = editPolicyCommand instanceof ICommandProxy ? ((ICommandProxy) editPolicyCommand)
-					.getICommand()
-					: new CommandProxy(editPolicyCommand);
+					.getICommand() : new CommandProxy(editPolicyCommand);
 			request.setParameter(SchoolBaseEditHelper.EDIT_POLICY_COMMAND,
 					command);
 		}
@@ -298,12 +298,32 @@ public class SchoolBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	/**
 	 * @generated
 	 */
+	public static LinkConstraints getLinkConstraints() {
+		LinkConstraints cached = SchoolDiagramEditorPlugin.getInstance()
+				.getLinkConstraints();
+		if (cached == null) {
+			SchoolDiagramEditorPlugin.getInstance().setLinkConstraints(
+					cached = new LinkConstraints());
+		}
+		return cached;
+	}
+
+	/**
+	 * @generated
+	 */
 	public static class LinkConstraints {
 
 		/**
 		 * @generated
 		 */
-		public static boolean canCreateStudentFriends_4001(Student source,
+		LinkConstraints() {
+			// use static method #getLinkConstraints() to access instance
+		}
+
+		/**
+		 * @generated
+		 */
+		public boolean canCreateStudentFriends_4001(Student source,
 				Student target) {
 			if (source != null) {
 				if (source.getFriends().contains(target)) {
@@ -317,7 +337,7 @@ public class SchoolBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		/**
 		 * @generated
 		 */
-		public static boolean canExistStudentFriends_4001(Student source,
+		public boolean canExistStudentFriends_4001(Student source,
 				Student target) {
 			return true;
 		}

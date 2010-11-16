@@ -82,7 +82,7 @@ public class SchoolVisualIDRegistry {
 	 * @generated
 	 */
 	public static String getType(int visualID) {
-		return String.valueOf(visualID);
+		return Integer.toString(visualID);
 	}
 
 	/**
@@ -124,6 +124,12 @@ public class SchoolVisualIDRegistry {
 			}
 		}
 		switch (containerVisualID) {
+		case DiagramEditPart.VISUAL_ID:
+			if (SchoolPackage.eINSTANCE.getSchool().isSuperTypeOf(
+					domainElement.eClass())) {
+				return SchoolEditPart.VISUAL_ID;
+			}
+			break;
 		case SchoolSchoolClassroomsCompartmentEditPart.VISUAL_ID:
 			if (SchoolPackage.eINSTANCE.getClassroom().isSuperTypeOf(
 					domainElement.eClass())) {
@@ -134,12 +140,6 @@ public class SchoolVisualIDRegistry {
 			if (SchoolPackage.eINSTANCE.getStudent().isSuperTypeOf(
 					domainElement.eClass())) {
 				return StudentEditPart.VISUAL_ID;
-			}
-			break;
-		case DiagramEditPart.VISUAL_ID:
-			if (SchoolPackage.eINSTANCE.getSchool().isSuperTypeOf(
-					domainElement.eClass())) {
-				return SchoolEditPart.VISUAL_ID;
 			}
 			break;
 		}
@@ -167,6 +167,11 @@ public class SchoolVisualIDRegistry {
 			}
 		}
 		switch (containerVisualID) {
+		case DiagramEditPart.VISUAL_ID:
+			if (SchoolEditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			break;
 		case SchoolEditPart.VISUAL_ID:
 			if (SchoolNameEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
@@ -195,11 +200,6 @@ public class SchoolVisualIDRegistry {
 			break;
 		case ClassroomClassroomStudentsCompartmentEditPart.VISUAL_ID:
 			if (StudentEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
-		case DiagramEditPart.VISUAL_ID:
-			if (SchoolEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;

@@ -28,4 +28,82 @@ public interface School extends EObject {
 	 */
 	EList<Classroom> getClassrooms();
 
+	/**
+	 * Returns the value of the '<em><b>City</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>City</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>City</em>' attribute.
+	 * @see #setCity(String)
+	 * @see jfb.examples.gmf.school.SchoolPackage#getSchool_City()
+	 * @model
+	 * @generated
+	 */
+	String getCity();
+
+	/**
+	 * Sets the value of the '{@link jfb.examples.gmf.school.School#getCity <em>City</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>City</em>' attribute.
+	 * @see #getCity()
+	 * @generated
+	 */
+	void setCity(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Zip Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Zip Code</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Zip Code</em>' attribute.
+	 * @see #setZipCode(String)
+	 * @see jfb.examples.gmf.school.SchoolPackage#getSchool_ZipCode()
+	 * @model
+	 * @generated
+	 */
+	String getZipCode();
+
+	/**
+	 * Sets the value of the '{@link jfb.examples.gmf.school.School#getZipCode <em>Zip Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Zip Code</em>' attribute.
+	 * @see #getZipCode()
+	 * @generated
+	 */
+	void setZipCode(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Director</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Director</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Director</em>' attribute.
+	 * @see #setDirector(String)
+	 * @see jfb.examples.gmf.school.SchoolPackage#getSchool_Director()
+	 * @model
+	 * @generated
+	 */
+	String getDirector();
+
+	/**
+	 * Sets the value of the '{@link jfb.examples.gmf.school.School#getDirector <em>Director</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Director</em>' attribute.
+	 * @see #getDirector()
+	 * @generated
+	 */
+	void setDirector(String value);
+
 }

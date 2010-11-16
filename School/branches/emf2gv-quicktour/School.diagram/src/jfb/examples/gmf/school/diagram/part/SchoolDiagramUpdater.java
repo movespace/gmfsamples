@@ -21,6 +21,7 @@ import jfb.examples.gmf.school.diagram.edit.parts.StudentEditPart;
 import jfb.examples.gmf.school.diagram.edit.parts.StudentFriendsEditPart;
 import jfb.examples.gmf.school.diagram.providers.SchoolElementTypes;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.notation.View;
@@ -33,33 +34,33 @@ public class SchoolDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getSemanticChildren(View view) {
+	public static List<SchoolNodeDescriptor> getSemanticChildren(View view) {
 		switch (SchoolVisualIDRegistry.getVisualID(view)) {
+		case DiagramEditPart.VISUAL_ID:
+			return getDiagram_1000SemanticChildren(view);
 		case SchoolSchoolClassroomsCompartmentEditPart.VISUAL_ID:
 			return getSchoolSchoolClassroomsCompartment_7001SemanticChildren(view);
 		case ClassroomClassroomStudentsCompartmentEditPart.VISUAL_ID:
 			return getClassroomClassroomStudentsCompartment_7002SemanticChildren(view);
-		case DiagramEditPart.VISUAL_ID:
-			return getDiagram_1000SemanticChildren(view);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getSchoolSchoolClassroomsCompartment_7001SemanticChildren(
+	public static List<SchoolNodeDescriptor> getSchoolSchoolClassroomsCompartment_7001SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		View containerView = (View) view.eContainer();
 		if (!containerView.isSetElement()) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		School modelElement = (School) containerView.getElement();
-		List result = new LinkedList();
-		for (Iterator it = modelElement.getClassrooms().iterator(); it
+		LinkedList<SchoolNodeDescriptor> result = new LinkedList<SchoolNodeDescriptor>();
+		for (Iterator<?> it = modelElement.getClassrooms().iterator(); it
 				.hasNext();) {
 			Classroom childElement = (Classroom) it.next();
 			int visualID = SchoolVisualIDRegistry.getNodeVisualID(view,
@@ -75,18 +76,19 @@ public class SchoolDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getClassroomClassroomStudentsCompartment_7002SemanticChildren(
+	public static List<SchoolNodeDescriptor> getClassroomClassroomStudentsCompartment_7002SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		View containerView = (View) view.eContainer();
 		if (!containerView.isSetElement()) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		Classroom modelElement = (Classroom) containerView.getElement();
-		List result = new LinkedList();
-		for (Iterator it = modelElement.getStudents().iterator(); it.hasNext();) {
+		LinkedList<SchoolNodeDescriptor> result = new LinkedList<SchoolNodeDescriptor>();
+		for (Iterator<?> it = modelElement.getStudents().iterator(); it
+				.hasNext();) {
 			Student childElement = (Student) it.next();
 			int visualID = SchoolVisualIDRegistry.getNodeVisualID(view,
 					childElement);
@@ -101,12 +103,13 @@ public class SchoolDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getDiagram_1000SemanticChildren(View view) {
+	public static List<SchoolNodeDescriptor> getDiagram_1000SemanticChildren(
+			View view) {
 		if (!view.isSetElement()) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		Diagram modelElement = (Diagram) view.getElement();
-		List result = new LinkedList();
+		LinkedList<SchoolNodeDescriptor> result = new LinkedList<SchoolNodeDescriptor>();
 		{
 			School childElement = modelElement.getSchool();
 			int visualID = SchoolVisualIDRegistry.getNodeVisualID(view,
@@ -121,7 +124,7 @@ public class SchoolDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getContainedLinks(View view) {
+	public static List<SchoolLinkDescriptor> getContainedLinks(View view) {
 		switch (SchoolVisualIDRegistry.getVisualID(view)) {
 		case DiagramEditPart.VISUAL_ID:
 			return getDiagram_1000ContainedLinks(view);
@@ -132,13 +135,13 @@ public class SchoolDiagramUpdater {
 		case StudentEditPart.VISUAL_ID:
 			return getStudent_3002ContainedLinks(view);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getIncomingLinks(View view) {
+	public static List<SchoolLinkDescriptor> getIncomingLinks(View view) {
 		switch (SchoolVisualIDRegistry.getVisualID(view)) {
 		case SchoolEditPart.VISUAL_ID:
 			return getSchool_2001IncomingLinks(view);
@@ -147,13 +150,13 @@ public class SchoolDiagramUpdater {
 		case StudentEditPart.VISUAL_ID:
 			return getStudent_3002IncomingLinks(view);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getOutgoingLinks(View view) {
+	public static List<SchoolLinkDescriptor> getOutgoingLinks(View view) {
 		switch (SchoolVisualIDRegistry.getVisualID(view)) {
 		case SchoolEditPart.VISUAL_ID:
 			return getSchool_2001OutgoingLinks(view);
@@ -162,63 +165,69 @@ public class SchoolDiagramUpdater {
 		case StudentEditPart.VISUAL_ID:
 			return getStudent_3002OutgoingLinks(view);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getDiagram_1000ContainedLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<SchoolLinkDescriptor> getDiagram_1000ContainedLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getSchool_2001ContainedLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<SchoolLinkDescriptor> getSchool_2001ContainedLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getClassroom_3001ContainedLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<SchoolLinkDescriptor> getClassroom_3001ContainedLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getStudent_3002ContainedLinks(View view) {
+	public static List<SchoolLinkDescriptor> getStudent_3002ContainedLinks(
+			View view) {
 		Student modelElement = (Student) view.getElement();
-		List result = new LinkedList();
-		result
-				.addAll(getOutgoingFeatureModelFacetLinks_Student_Friends_4001(modelElement));
+		LinkedList<SchoolLinkDescriptor> result = new LinkedList<SchoolLinkDescriptor>();
+		result.addAll(getOutgoingFeatureModelFacetLinks_Student_Friends_4001(modelElement));
 		return result;
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getSchool_2001IncomingLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<SchoolLinkDescriptor> getSchool_2001IncomingLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getClassroom_3001IncomingLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<SchoolLinkDescriptor> getClassroom_3001IncomingLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getStudent_3002IncomingLinks(View view) {
+	public static List<SchoolLinkDescriptor> getStudent_3002IncomingLinks(
+			View view) {
 		Student modelElement = (Student) view.getElement();
-		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
-				.getResourceSet().getResources());
-		List result = new LinkedList();
+		Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences = EcoreUtil.CrossReferencer
+				.find(view.eResource().getResourceSet().getResources());
+		LinkedList<SchoolLinkDescriptor> result = new LinkedList<SchoolLinkDescriptor>();
 		result.addAll(getIncomingFeatureModelFacetLinks_Student_Friends_4001(
 				modelElement, crossReferences));
 		return result;
@@ -227,38 +236,40 @@ public class SchoolDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getSchool_2001OutgoingLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<SchoolLinkDescriptor> getSchool_2001OutgoingLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getClassroom_3001OutgoingLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<SchoolLinkDescriptor> getClassroom_3001OutgoingLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getStudent_3002OutgoingLinks(View view) {
+	public static List<SchoolLinkDescriptor> getStudent_3002OutgoingLinks(
+			View view) {
 		Student modelElement = (Student) view.getElement();
-		List result = new LinkedList();
-		result
-				.addAll(getOutgoingFeatureModelFacetLinks_Student_Friends_4001(modelElement));
+		LinkedList<SchoolLinkDescriptor> result = new LinkedList<SchoolLinkDescriptor>();
+		result.addAll(getOutgoingFeatureModelFacetLinks_Student_Friends_4001(modelElement));
 		return result;
 	}
 
 	/**
 	 * @generated
 	 */
-	private static Collection getIncomingFeatureModelFacetLinks_Student_Friends_4001(
-			Student target, Map crossReferences) {
-		Collection result = new LinkedList();
-		Collection settings = (Collection) crossReferences.get(target);
-		for (Iterator it = settings.iterator(); it.hasNext();) {
-			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
-					.next();
+	private static Collection<SchoolLinkDescriptor> getIncomingFeatureModelFacetLinks_Student_Friends_4001(
+			Student target,
+			Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
+		LinkedList<SchoolLinkDescriptor> result = new LinkedList<SchoolLinkDescriptor>();
+		Collection<EStructuralFeature.Setting> settings = crossReferences
+				.get(target);
+		for (EStructuralFeature.Setting setting : settings) {
 			if (setting.getEStructuralFeature() == SchoolPackage.eINSTANCE
 					.getStudent_Friends()) {
 				result.add(new SchoolLinkDescriptor(setting.getEObject(),
@@ -272,10 +283,10 @@ public class SchoolDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection getOutgoingFeatureModelFacetLinks_Student_Friends_4001(
+	private static Collection<SchoolLinkDescriptor> getOutgoingFeatureModelFacetLinks_Student_Friends_4001(
 			Student source) {
-		Collection result = new LinkedList();
-		for (Iterator destinations = source.getFriends().iterator(); destinations
+		LinkedList<SchoolLinkDescriptor> result = new LinkedList<SchoolLinkDescriptor>();
+		for (Iterator<?> destinations = source.getFriends().iterator(); destinations
 				.hasNext();) {
 			Student destination = (Student) destinations.next();
 			result.add(new SchoolLinkDescriptor(source, destination,

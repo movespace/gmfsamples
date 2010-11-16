@@ -16,11 +16,8 @@ import jfb.examples.gmf.school.SchoolPackage;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -68,6 +65,9 @@ public class SchoolItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addDirectorPropertyDescriptor(object);
+			addZipCodePropertyDescriptor(object);
+			addCityPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -86,6 +86,72 @@ public class SchoolItemProvider
 				 getString("_UI_School_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_School_name_feature", "_UI_School_type"),
 				 SchoolPackage.Literals.SCHOOL__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the City feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCityPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_School_city_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_School_city_feature", "_UI_School_type"),
+				 SchoolPackage.Literals.SCHOOL__CITY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Zip Code feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addZipCodePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_School_zipCode_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_School_zipCode_feature", "_UI_School_type"),
+				 SchoolPackage.Literals.SCHOOL__ZIP_CODE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Director feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDirectorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_School_director_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_School_director_feature", "_UI_School_type"),
+				 SchoolPackage.Literals.SCHOOL__DIRECTOR,
 				 true,
 				 false,
 				 false,
@@ -162,6 +228,9 @@ public class SchoolItemProvider
 
 		switch (notification.getFeatureID(School.class)) {
 			case SchoolPackage.SCHOOL__NAME:
+			case SchoolPackage.SCHOOL__DIRECTOR:
+			case SchoolPackage.SCHOOL__ZIP_CODE:
+			case SchoolPackage.SCHOOL__CITY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SchoolPackage.SCHOOL__CLASSROOMS:

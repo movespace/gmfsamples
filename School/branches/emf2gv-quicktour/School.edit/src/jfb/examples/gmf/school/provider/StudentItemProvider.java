@@ -15,9 +15,7 @@ import jfb.examples.gmf.school.Student;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -65,6 +63,8 @@ public class StudentItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addNicknamePropertyDescriptor(object);
+			addAgePropertyDescriptor(object);
 			addFriendsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -115,6 +115,50 @@ public class StudentItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Age feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAgePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Student_age_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Student_age_feature", "_UI_Student_type"),
+				 SchoolPackage.Literals.STUDENT__AGE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Nickname feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNicknamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Student_nickname_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Student_nickname_feature", "_UI_Student_type"),
+				 SchoolPackage.Literals.STUDENT__NICKNAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Student.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -152,6 +196,8 @@ public class StudentItemProvider
 
 		switch (notification.getFeatureID(Student.class)) {
 			case SchoolPackage.STUDENT__NAME:
+			case SchoolPackage.STUDENT__NICKNAME:
+			case SchoolPackage.STUDENT__AGE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

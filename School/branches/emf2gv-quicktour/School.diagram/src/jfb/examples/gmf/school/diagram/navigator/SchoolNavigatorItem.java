@@ -73,10 +73,9 @@ public class SchoolNavigatorItem extends SchoolAbstractNavigatorItem {
 		if (obj instanceof jfb.examples.gmf.school.diagram.navigator.SchoolNavigatorItem) {
 			return EcoreUtil
 					.getURI(getView())
-					.equals(
-							EcoreUtil
-									.getURI(((jfb.examples.gmf.school.diagram.navigator.SchoolNavigatorItem) obj)
-											.getView()));
+					.equals(EcoreUtil
+							.getURI(((jfb.examples.gmf.school.diagram.navigator.SchoolNavigatorItem) obj)
+									.getView()));
 		}
 		return super.equals(obj);
 	}

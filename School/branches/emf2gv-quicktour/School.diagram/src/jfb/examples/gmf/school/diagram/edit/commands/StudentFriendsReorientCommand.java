@@ -72,7 +72,7 @@ public class StudentFriendsReorientCommand extends EditElementCommand {
 		if (!(oldEnd instanceof Student && newEnd instanceof Student)) {
 			return false;
 		}
-		return SchoolBaseItemSemanticEditPolicy.LinkConstraints
+		return SchoolBaseItemSemanticEditPolicy.getLinkConstraints()
 				.canExistStudentFriends_4001(getNewSource(), getOldTarget());
 	}
 
@@ -83,7 +83,7 @@ public class StudentFriendsReorientCommand extends EditElementCommand {
 		if (!(oldEnd instanceof Student && newEnd instanceof Student)) {
 			return false;
 		}
-		return SchoolBaseItemSemanticEditPolicy.LinkConstraints
+		return SchoolBaseItemSemanticEditPolicy.getLinkConstraints()
 				.canExistStudentFriends_4001(getOldSource(), getNewTarget());
 	}
 

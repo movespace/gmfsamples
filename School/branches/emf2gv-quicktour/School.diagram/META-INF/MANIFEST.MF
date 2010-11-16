@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: jfb.examples.gmf.school.diagram.part.SchoolDiagramEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: jfb.examples.gmf.school.diagram.edit.parts, 
+Export-Package: jfb.examples.gmf.school.diagram.edit.parts,
  jfb.examples.gmf.school.diagram.part,
  jfb.examples.gmf.school.diagram.providers
 Require-Bundle: org.eclipse.core.runtime,
@@ -37,3 +37,5 @@ Require-Bundle: org.eclipse.core.runtime,
  School.edit;visibility:=reexport,
  org.eclipse.gef;visibility:=reexport
 Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -85,7 +85,7 @@ public class SchoolEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected LayoutEditPolicy createLayoutEditPolicy() {
-		LayoutEditPolicy lep = new LayoutEditPolicy() {
+		org.eclipse.gmf.runtime.diagram.ui.editpolicies.LayoutEditPolicy lep = new org.eclipse.gmf.runtime.diagram.ui.editpolicies.LayoutEditPolicy() {
 
 			protected EditPolicy createChildEditPolicy(EditPart child) {
 				EditPolicy result = child
@@ -111,8 +111,7 @@ public class SchoolEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createNodeShape() {
-		SchoolFigure figure = new SchoolFigure();
-		return primaryShape = figure;
+		return primaryShape = new SchoolFigure();
 	}
 
 	/**
@@ -134,9 +133,8 @@ public class SchoolEditPart extends ShapeNodeEditPart {
 		if (childEditPart instanceof SchoolSchoolClassroomsCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getFigureSchoolCompartmentFigure();
 			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
-			pane
-					.add(((SchoolSchoolClassroomsCompartmentEditPart) childEditPart)
-							.getFigure());
+			pane.add(((SchoolSchoolClassroomsCompartmentEditPart) childEditPart)
+					.getFigure());
 			return true;
 		}
 		return false;
@@ -152,9 +150,8 @@ public class SchoolEditPart extends ShapeNodeEditPart {
 		if (childEditPart instanceof SchoolSchoolClassroomsCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getFigureSchoolCompartmentFigure();
 			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
-			pane
-					.remove(((SchoolSchoolClassroomsCompartmentEditPart) childEditPart)
-							.getFigure());
+			pane.remove(((SchoolSchoolClassroomsCompartmentEditPart) childEditPart)
+					.getFigure());
 			return true;
 		}
 		return false;
@@ -324,7 +321,6 @@ public class SchoolEditPart extends ShapeNodeEditPart {
 			BorderLayout layoutThis = new BorderLayout();
 			this.setLayoutManager(layoutThis);
 
-			this.setLineWidth(1);
 			createContents();
 		}
 
@@ -339,29 +335,9 @@ public class SchoolEditPart extends ShapeNodeEditPart {
 			this.add(fFigureSchoolNameFigure, BorderLayout.TOP);
 
 			fFigureSchoolCompartmentFigure = new RectangleFigure();
-			fFigureSchoolCompartmentFigure.setLineWidth(1);
 
 			this.add(fFigureSchoolCompartmentFigure, BorderLayout.CENTER);
 
-		}
-
-		/**
-		 * @generated
-		 */
-		private boolean myUseLocalCoordinates = false;
-
-		/**
-		 * @generated
-		 */
-		protected boolean useLocalCoordinates() {
-			return myUseLocalCoordinates;
-		}
-
-		/**
-		 * @generated
-		 */
-		protected void setUseLocalCoordinates(boolean useLocalCoordinates) {
-			myUseLocalCoordinates = useLocalCoordinates;
 		}
 
 		/**

@@ -42,13 +42,11 @@ public class SchoolNavigatorLabelProvider extends LabelProvider implements
 		SchoolDiagramEditorPlugin
 				.getInstance()
 				.getImageRegistry()
-				.put(
-						"Navigator?UnknownElement", ImageDescriptor.getMissingImageDescriptor()); //$NON-NLS-1$
+				.put("Navigator?UnknownElement", ImageDescriptor.getMissingImageDescriptor()); //$NON-NLS-1$
 		SchoolDiagramEditorPlugin
 				.getInstance()
 				.getImageRegistry()
-				.put(
-						"Navigator?ImageNotFound", ImageDescriptor.getMissingImageDescriptor()); //$NON-NLS-1$
+				.put("Navigator?ImageNotFound", ImageDescriptor.getMissingImageDescriptor()); //$NON-NLS-1$
 	}
 
 	/**
@@ -90,6 +88,12 @@ public class SchoolNavigatorLabelProvider extends LabelProvider implements
 	 */
 	public Image getImage(View view) {
 		switch (SchoolVisualIDRegistry.getVisualID(view)) {
+		case StudentFriendsEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http:///jfb/examples/gmf/school.ecore?Student?friends", SchoolElementTypes.StudentFriends_4001); //$NON-NLS-1$
+		case StudentEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Node?http:///jfb/examples/gmf/school.ecore?Student", SchoolElementTypes.Student_3002); //$NON-NLS-1$
 		case DiagramEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Diagram?http:///jfb/examples/gmf/school.ecore?Diagram", SchoolElementTypes.Diagram_1000); //$NON-NLS-1$
@@ -99,12 +103,6 @@ public class SchoolNavigatorLabelProvider extends LabelProvider implements
 		case ClassroomEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Node?http:///jfb/examples/gmf/school.ecore?Classroom", SchoolElementTypes.Classroom_3001); //$NON-NLS-1$
-		case StudentEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Node?http:///jfb/examples/gmf/school.ecore?Student", SchoolElementTypes.Student_3002); //$NON-NLS-1$
-		case StudentFriendsEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Link?http:///jfb/examples/gmf/school.ecore?Student?friends", SchoolElementTypes.StudentFriends_4001); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}
@@ -157,16 +155,16 @@ public class SchoolNavigatorLabelProvider extends LabelProvider implements
 			return getUnresolvedDomainElementProxyText(view);
 		}
 		switch (SchoolVisualIDRegistry.getVisualID(view)) {
+		case StudentFriendsEditPart.VISUAL_ID:
+			return getStudentFriends_4001Text(view);
+		case StudentEditPart.VISUAL_ID:
+			return getStudent_3002Text(view);
 		case DiagramEditPart.VISUAL_ID:
 			return getDiagram_1000Text(view);
 		case SchoolEditPart.VISUAL_ID:
 			return getSchool_2001Text(view);
 		case ClassroomEditPart.VISUAL_ID:
 			return getClassroom_3001Text(view);
-		case StudentEditPart.VISUAL_ID:
-			return getStudent_3002Text(view);
-		case StudentFriendsEditPart.VISUAL_ID:
-			return getStudentFriends_4001Text(view);
 		}
 		return getUnknownElementText(view);
 	}

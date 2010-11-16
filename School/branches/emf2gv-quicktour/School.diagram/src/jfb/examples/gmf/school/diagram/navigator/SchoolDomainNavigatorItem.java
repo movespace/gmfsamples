@@ -100,10 +100,9 @@ public class SchoolDomainNavigatorItem extends PlatformObject {
 		if (obj instanceof jfb.examples.gmf.school.diagram.navigator.SchoolDomainNavigatorItem) {
 			return EcoreUtil
 					.getURI(getEObject())
-					.equals(
-							EcoreUtil
-									.getURI(((jfb.examples.gmf.school.diagram.navigator.SchoolDomainNavigatorItem) obj)
-											.getEObject()));
+					.equals(EcoreUtil
+							.getURI(((jfb.examples.gmf.school.diagram.navigator.SchoolDomainNavigatorItem) obj)
+									.getEObject()));
 		}
 		return super.equals(obj);
 	}

@@ -42,7 +42,7 @@ public class StudentItemSemanticEditPolicy extends
 		CompositeTransactionalCommand cmd = new CompositeTransactionalCommand(
 				getEditingDomain(), null);
 		cmd.setTransactionNestingEnabled(false);
-		for (Iterator it = view.getTargetEdges().iterator(); it.hasNext();) {
+		for (Iterator<?> it = view.getTargetEdges().iterator(); it.hasNext();) {
 			Edge incomingLink = (Edge) it.next();
 			if (SchoolVisualIDRegistry.getVisualID(incomingLink) == StudentFriendsEditPart.VISUAL_ID) {
 				DestroyReferenceRequest r = new DestroyReferenceRequest(
@@ -53,7 +53,7 @@ public class StudentItemSemanticEditPolicy extends
 				continue;
 			}
 		}
-		for (Iterator it = view.getSourceEdges().iterator(); it.hasNext();) {
+		for (Iterator<?> it = view.getSourceEdges().iterator(); it.hasNext();) {
 			Edge outgoingLink = (Edge) it.next();
 			if (SchoolVisualIDRegistry.getVisualID(outgoingLink) == StudentFriendsEditPart.VISUAL_ID) {
 				DestroyReferenceRequest r = new DestroyReferenceRequest(
@@ -92,8 +92,8 @@ public class StudentItemSemanticEditPolicy extends
 	protected Command getStartCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
 		if (SchoolElementTypes.StudentFriends_4001 == req.getElementType()) {
-			return getGEFWrapper(new StudentFriendsCreateCommand(req, req
-					.getSource(), req.getTarget()));
+			return getGEFWrapper(new StudentFriendsCreateCommand(req,
+					req.getSource(), req.getTarget()));
 		}
 		return null;
 	}
@@ -104,8 +104,8 @@ public class StudentItemSemanticEditPolicy extends
 	protected Command getCompleteCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
 		if (SchoolElementTypes.StudentFriends_4001 == req.getElementType()) {
-			return getGEFWrapper(new StudentFriendsCreateCommand(req, req
-					.getSource(), req.getTarget()));
+			return getGEFWrapper(new StudentFriendsCreateCommand(req,
+					req.getSource(), req.getTarget()));
 		}
 		return null;
 	}
