@@ -6,7 +6,6 @@
  */
 package jfb.examples.gmf.school.util;
 
-import jfb.examples.gmf.school.*;
 import jfb.examples.gmf.school.Classroom;
 import jfb.examples.gmf.school.Diagram;
 import jfb.examples.gmf.school.School;
